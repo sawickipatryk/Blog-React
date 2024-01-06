@@ -43,6 +43,8 @@ const settings = [
 ]
 
 export const Navbar = (props) => {
+  // eslint-disable-next-line no-unused-vars
+  const [isLogged, setIsLogged] = React.useState(false)
   const {
     sx,
     ...otherProps
@@ -100,7 +102,7 @@ export const Navbar = (props) => {
             >
               <Box
                 sx={{
-                  flexGrow: 1
+                  flexGrow: 0
                 }}
               >
                 <IconButton
@@ -161,9 +163,11 @@ export const Navbar = (props) => {
               </Box>
               <Box
                 sx={{
+                  display: 'flex',
                   alignItems: 'center',
                   gap: '5px',
-                  flexGrow: 1
+                  flexGrow: 1,
+                  justifyContent: 'center'
                 }}
               >
                 <AdbIcon
@@ -185,51 +189,69 @@ export const Navbar = (props) => {
                 >
                   LOGO
                 </Typography>
-              </Box>
-              <Box>
-                <Tooltip title={'Open settings'}>
-                  <IconButton
-                    onClick={handleOpenUserMenu}
-                    sx={{ p: 0 }}
-                  >
-                    <Avatar
-                      alt={'Remy Sharp'}
-                      src={'/static/images/avatar/2.jpg'}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{
-                    mt: '45px',
-                    '& .MuiMenu-paper': {
-                      color: theme.palette.primary.main,
-                      backgroundColor: theme.palette.background.navBarBackgroundColor
-                    }
-                  }}
-                  id={'menu-appbar'}
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={setting.id}
-                      onClick={handleCloseUserMenu}
+              </Box> {
+                isLogged
+                  ? (
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Tooltip title={'Open settings'}>
+                        <IconButton
+                          onClick={handleOpenUserMenu}
+                          sx={{ p: 0 }}
+                        >
+                          <Avatar
+                            alt={'Remy Sharp'}
+                            src={'/static/images/avatar/2.jpg'}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        sx={{
+                          mt: '45px',
+                          '& .MuiMenu-paper': {
+                            color: theme.palette.primary.main,
+                            backgroundColor: theme.palette.background.navBarBackgroundColor
+                          }
+                        }}
+                        id={'menu-appbar'}
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right'
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right'
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {settings.map((setting) => (
+                          <MenuItem
+                            key={setting.id}
+                            onClick={handleCloseUserMenu}
+                          >
+                            <Typography textAlign={'center'}>{setting.name}</Typography>
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </Box>
+                    )
+                  : (
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        flexGrow: 0,
+                        display: 'block',
+                        '&:hover': {
+                          color: '#fff'
+                        }
+                      }}
                     >
-                      <Typography textAlign={'center'}>{setting.name}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+                      Login
+                    </Button>
+                    )
+              }
             </Box>
             <Box
               sx={{
@@ -287,52 +309,70 @@ export const Navbar = (props) => {
                   </Button>
                 ))}
               </Box>
-              <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title={'Open settings'}>
-                  <IconButton
-                    onClick={handleOpenUserMenu}
-                    sx={{ p: 0 }}
-                  >
-                    <Avatar
-                      alt={'Remy Sharp'}
-                      src={'/static/images/avatar/2.jpg'}
-                    />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{
-                    mt: '45px',
-                    '& .MuiMenu-paper': {
-                      color: theme.palette.primary.main,
-                      backgroundColor: theme.palette.background.navBarBackgroundColor
-                    }
-                  }}
-                  id={'menu-appbar'}
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={setting.id}
-                      onClick={handleCloseUserMenu}
+              {
+                isLogged
+                  ? (
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Tooltip title={'Open settings'}>
+                        <IconButton
+                          onClick={handleOpenUserMenu}
+                          sx={{ p: 0 }}
+                        >
+                          <Avatar
+                            alt={'Remy Sharp'}
+                            src={'/static/images/avatar/2.jpg'}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        sx={{
+                          mt: '45px',
+                          '& .MuiMenu-paper': {
+                            color: theme.palette.primary.main,
+                            backgroundColor: theme.palette.background.navBarBackgroundColor
+                          }
+                        }}
+                        id={'menu-appbar'}
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right'
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right'
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {settings.map((setting) => (
+                          <MenuItem
+                            key={setting.id}
+                            onClick={handleCloseUserMenu}
+                          >
+                            <Typography textAlign={'center'}>{setting.name}</Typography>
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </Box>
+                    )
+                  : (
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        p: 3,
+                        display: 'block',
+                        '&:hover': {
+                          color: '#fff'
+                        }
+                      }}
                     >
-                      <Typography textAlign={'center'}>{setting.name}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </Box>
+                      Login
+                    </Button>
+                    )
+              }
             </Box>
-
             <SearchInput/>
           </Toolbar>
         </Container>
