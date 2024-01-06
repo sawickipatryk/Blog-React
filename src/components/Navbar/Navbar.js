@@ -20,6 +20,8 @@ import theme from '../../theme'
 import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon from '@mui/icons-material/Menu'
 
+import SearchInput from '../SearchInput'
+
 const pages = [
   {
     id: 1,
@@ -75,190 +77,263 @@ export const Navbar = (props) => {
         {...otherProps}
         position={'static'}
         sx={{
-          backgroundColor: theme.palette.background.navBarBackgroundColor
+          backgroundColor: theme.palette.background.navBarBackgroundColor,
+          padding: '12px 0px'
         }}
       >
         <Container maxWidth={'lg'}>
-          <Toolbar disableGutters>
-
+          <Toolbar
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+            disableGutters
+          >
             <Box
               sx={{
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'flex', md: 'none' },
+                width: '100%',
                 alignItems: 'center',
-                gap: '5px',
-                flexGrow: 1
+                paddingBottom: '10px'
               }}
             >
-              <AdbIcon
+              <Box
                 sx={{
-                  color: theme.palette.primary.main
-                }}
-                fontSize={'large'}
-              />
-              <Typography
-                variant={'h4'}
-                noWrap
-                component={'a'}
-                href={'/'}
-                sx={{
-                  textDecoration: 'none',
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightBold
+                  flexGrow: 1
                 }}
               >
-                LOGO
-              </Typography>
-            </Box>
-
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page) => (
-                <Button
-                  href={page.href}
-                  key={page.id}
-                  onClick={handleCloseNavMenu}
+                <IconButton
+                  size={'large'}
+                  aria-label={'menu'}
+                  aria-controls={'menu-appbar'}
+                  aria-haspopup={'true'}
+                  onClick={handleOpenNavMenu}
                   sx={{
-                    p: 3,
-                    display: 'block',
-                    '&:hover': {
-                      color: '#fff'
+                    padding: 0
+                  }}
+                >
+                  <MenuIcon
+                    fontSize={'large'}
+                    sx={{
+
+                      color: theme.palette.primary.main
+                    }}
+                  />
+                </IconButton>
+                <Menu
+                  id={'menu-appbar'}
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                    '& .MuiMenu-paper': {
+                      width: '100%',
+                      color: theme.palette.primary.main,
+                      backgroundColor: theme.palette.background.navBarBackgroundColor
                     }
                   }}
                 >
-                  {page.name}
-                </Button>
-              ))}
-            </Box>
-
-            <Box
-              sx={{
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1
-              }}
-            >
-              <IconButton
-                size={'large'}
-                aria-label={'menu'}
-                aria-controls={'menu-appbar'}
-                aria-haspopup={'true'}
-                onClick={handleOpenNavMenu}
+                  {pages.map((page) => (
+                    <MenuItem
+                      key={page.id}
+                      component={'a'}
+                      href={page.href}
+                      sx={{
+                        padding: '12px 16px'
+                      }}
+                      onClick={handleCloseNavMenu}
+                    >
+                      <Typography textAlign={'center'}>{page.name}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              <Box
+                sx={{
+                  alignItems: 'center',
+                  gap: '5px',
+                  flexGrow: 1
+                }}
               >
-                <MenuIcon
-                  fontSize={'large'}
+                <AdbIcon
                   sx={{
                     color: theme.palette.primary.main
                   }}
+                  fontSize={'large'}
                 />
-              </IconButton>
-              <Menu
-                id={'menu-appbar'}
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center'
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                  '& .MuiMenu-paper': {
-                    width: '100%',
+                <Typography
+                  variant={'h4'}
+                  noWrap
+                  component={'a'}
+                  href={'/'}
+                  sx={{
+                    textDecoration: 'none',
                     color: theme.palette.primary.main,
-                    backgroundColor: theme.palette.background.navBarBackgroundColor
-                  }
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem
-                    key={page.id}
-                    component={'a'}
-                    href={page.href}
-                    sx={{
-                      padding: '12px 16px'
-                    }}
-                    onClick={handleCloseNavMenu}
+                    fontWeight: theme.typography.fontWeightBold
+                  }}
+                >
+                  LOGO
+                </Typography>
+              </Box>
+              <Box>
+                <Tooltip title={'Open settings'}>
+                  <IconButton
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0 }}
                   >
-                    <Typography textAlign={'center'}>{page.name}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+                    <Avatar
+                      alt={'Remy Sharp'}
+                      src={'/static/images/avatar/2.jpg'}
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{
+                    mt: '45px',
+                    '& .MuiMenu-paper': {
+                      color: theme.palette.primary.main,
+                      backgroundColor: theme.palette.background.navBarBackgroundColor
+                    }
+                  }}
+                  id={'menu-appbar'}
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={setting.id}
+                      onClick={handleCloseUserMenu}
+                    >
+                      <Typography textAlign={'center'}>{setting.name}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Box>
             <Box
               sx={{
-                display: { xs: 'flex', md: 'none' },
-                alignItems: 'center',
-                gap: '5px',
-                flexGrow: 1
+                display: { xs: 'none', md: 'flex' },
+                width: '100%',
+                alignItems: 'center'
               }}
             >
-              <AdbIcon
+              <Box
                 sx={{
-                  color: theme.palette.primary.main
-                }}
-                fontSize={'large'}
-              />
-              <Typography
-                variant={'h4'}
-                noWrap
-                component={'a'}
-                href={'/'}
-                sx={{
-                  textDecoration: 'none',
-                  color: theme.palette.primary.main,
-                  fontWeight: theme.typography.fontWeightBold
+                  alignItems: 'center',
+                  flexGrow: 1,
+                  gap: '5px'
                 }}
               >
-                LOGO
-              </Typography>
-            </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title={'Open settings'}>
-                <IconButton
-                  onClick={handleOpenUserMenu}
-                  sx={{ p: 0 }}
-                >
-                  <Avatar
-                    alt={'Remy Sharp'}
-                    src={'/static/images/avatar/2.jpg'}
-                  />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{
-                  mt: '45px',
-                  '& .MuiMenu-paper': {
+                <AdbIcon
+                  sx={{
+                    color: theme.palette.primary.main
+                  }}
+                  fontSize={'large'}
+                />
+                <Typography
+                  variant={'h4'}
+                  noWrap
+                  component={'a'}
+                  href={'/'}
+                  sx={{
+                    textDecoration: 'none',
                     color: theme.palette.primary.main,
-                    backgroundColor: theme.palette.background.navBarBackgroundColor
-                  }
+                    fontWeight: theme.typography.fontWeightBold
+                  }}
+                >
+                  LOGO
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex'
                 }}
-                id={'menu-appbar'}
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={setting.id}
-                    onClick={handleCloseUserMenu}
+                {pages.map((page) => (
+                  <Button
+                    href={page.href}
+                    key={page.id}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      p: 3,
+                      display: 'block',
+                      '&:hover': {
+                        color: '#fff'
+                      }
+                    }}
                   >
-                    <Typography textAlign={'center'}>{setting.name}</Typography>
-                  </MenuItem>
+                    {page.name}
+                  </Button>
                 ))}
-              </Menu>
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title={'Open settings'}>
+                  <IconButton
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0 }}
+                  >
+                    <Avatar
+                      alt={'Remy Sharp'}
+                      src={'/static/images/avatar/2.jpg'}
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{
+                    mt: '45px',
+                    '& .MuiMenu-paper': {
+                      color: theme.palette.primary.main,
+                      backgroundColor: theme.palette.background.navBarBackgroundColor
+                    }
+                  }}
+                  id={'menu-appbar'}
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={setting.id}
+                      onClick={handleCloseUserMenu}
+                    >
+                      <Typography textAlign={'center'}>{setting.name}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Box>
+
+            <SearchInput/>
           </Toolbar>
         </Container>
       </AppBar>
