@@ -79,8 +79,12 @@ export const Navbar = (props) => {
         {...otherProps}
         position={'fixed'}
         sx={{
+          padding: '12px 0px',
           backgroundColor: theme.palette.background.navBarBackgroundColor,
-          padding: '12px 0px'
+          [theme.breakpoints.up('md')]: {
+            padding: '0px 0px 12px 0px'
+          }
+
         }}
       >
         <Container maxWidth={'lg'}>
