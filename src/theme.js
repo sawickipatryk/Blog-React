@@ -73,6 +73,25 @@ const theme = createTheme({
       fontWeight: '700',
       letterSpacing: '1.3px'
     }
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#C69749'
+            },
+            '&:hover fieldset': {
+              borderColor: '#C69749'
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#C69749'
+            }
+          }
+        }
+      }
+    }
   }
 
 })
