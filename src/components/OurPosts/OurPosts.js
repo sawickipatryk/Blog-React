@@ -25,7 +25,7 @@ const postsArray = [
   {
     id: 3,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/ge12bb0b0fa5e77b53cbb413aba1cbafb4b852642f7ca520d156f71466f84d1a0ab424299bbdc99a9ff8719f8e9bf8de3fa2da4866b9e6c843479221e1d8e9c8a_1280.jpg',
+    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -51,7 +51,7 @@ const secondPostsArray = [
   {
     id: 3,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/ge12bb0b0fa5e77b53cbb413aba1cbafb4b852642f7ca520d156f71466f84d1a0ab424299bbdc99a9ff8719f8e9bf8de3fa2da4866b9e6c843479221e1d8e9c8a_1280.jpg',
+    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -59,7 +59,7 @@ const secondPostsArray = [
   {
     id: 4,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/ge12bb0b0fa5e77b53cbb413aba1cbafb4b852642f7ca520d156f71466f84d1a0ab424299bbdc99a9ff8719f8e9bf8de3fa2da4866b9e6c843479221e1d8e9c8a_1280.jpg',
+    img: 'https://pixabay.com/get/gfc4c2c355df84237ac4d06d2e90cce0a4e50f69333b03946ed94ab6d3861ba5d4262e416df46e268a7d797343c65d78ecc9edb15d91f679a19d3a8aed4307d28_1280.png',
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
