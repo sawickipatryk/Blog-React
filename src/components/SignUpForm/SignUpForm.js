@@ -7,6 +7,7 @@ import theme from '../../theme'
 export const SignInForm = (props) => {
   const {
     sx,
+    onSubmit,
     ...otherProps
   } = props
 
@@ -30,6 +31,7 @@ export const SignInForm = (props) => {
       </Typography>
       <Box
         component={'form'}
+        onSubmit={onSubmit}
         sx={{
 
           '& .MuiTextField-root': {
@@ -140,7 +142,8 @@ export const SignInForm = (props) => {
 }
 
 SignInForm.propTypes = {
-  sx: PropTypes.object
+  sx: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default SignInForm

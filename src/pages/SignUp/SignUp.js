@@ -15,6 +15,7 @@ export const SignUp = (props) => {
   } = props
 
   const methods = useForm()
+  const { handleSubmit } = methods
 
   return (
     <Box
@@ -28,7 +29,9 @@ export const SignUp = (props) => {
           <FormProvider
             {...methods}
           >
-            <SignUpForm />
+            <SignUpForm
+              onSubmit= {handleSubmit((data) => console.log(data))}
+            />
           </FormProvider>
     }
       />
