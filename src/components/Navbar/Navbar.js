@@ -243,6 +243,7 @@ export const Navbar = (props) => {
                     )
                   : (
                     <Button
+                      href={'/login'}
                       onClick={handleCloseNavMenu}
                       sx={{
                         flexGrow: 0,
@@ -363,6 +364,7 @@ export const Navbar = (props) => {
                     )
                   : (
                     <Button
+                      href={'/login'}
                       onClick={handleCloseNavMenu}
                       sx={{
                         p: 3,
