@@ -1,10 +1,4 @@
-import { Roboto } from 'next/font/google'
 import { createTheme, responsiveFontSizes } from '@mui/material/styles'
-
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin']
-})
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -41,7 +35,7 @@ const theme = createTheme({
     borderRadius: 4
   },
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: 'Roboto',
     fontWeightBold: '700',
     fontWeightMedium: '500',
     fontWeightRegular: '400',
