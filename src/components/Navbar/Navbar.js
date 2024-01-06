@@ -75,7 +75,7 @@ export const Navbar = (props) => {
     >
       <AppBar
         {...otherProps}
-        position={'static'}
+        position={'fixed'}
         sx={{
           backgroundColor: theme.palette.background.navBarBackgroundColor,
           padding: '12px 0px'
