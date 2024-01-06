@@ -41,41 +41,32 @@ const theme = createTheme({
     fontWeightRegular: '400',
     fontWeightLight: '300',
     h1: {
-      fontSize: '48px',
-      color: '#fff'
+      fontSize: '48px'
     },
     h2: {
-      fontSize: '42px',
-      color: '#fff'
+      fontSize: '42px'
     },
     h3: {
-      fontSize: '38px',
-      color: '#fff'
+      fontSize: '38px'
     },
     h4: {
-      fontSize: '32px',
-      color: '#fff'
+      fontSize: '32px'
     },
     h5: {
-      fontSize: '28px',
-      color: '#fff'
+      fontSize: '28px'
     },
     h6: {
-      fontSize: '22px',
-      color: '#fff'
+      fontSize: '22px'
     },
     subtitle1: {
-      fontSize: '24px',
-      color: '#fff'
+      fontSize: '24px'
     },
     body1: {
       fontSize: '20px',
-      color: '#fff',
       letterSpacing: '0.3px'
     },
     body2: {
-      fontSize: '16px',
-      color: '#fff'
+      fontSize: '16px'
     },
     button: {
       fontSize: '16px',
