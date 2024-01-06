@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import { Box, Typography, Container } from '@mui/material'
 
 import MainLayout from '../../layouts/MainLayout'
-import Hero from '../../components/Hero/Hero'
+import Hero from '../../components/Hero'
+import OurPosts from '../../components/OurPosts'
 
 import hero from './hero.jpg'
 import theme from '../../theme'
@@ -121,6 +122,7 @@ export const MainPage = (props) => {
                     </Container>
 
                   </Box>
+                  <OurPosts/>
                 </>
                 }
             />
