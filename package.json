@@ -17,6 +17,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-auth": "^1.0.3",
+    "react-hook-form": "^7.49.2",
+    "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
     "web-vitals": "^2.1.4"
