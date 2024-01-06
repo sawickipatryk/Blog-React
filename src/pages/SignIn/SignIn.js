@@ -5,6 +5,10 @@ import { Box } from '@mui/material'
 
 import { useForm, FormProvider } from 'react-hook-form'
 
+import { signInWithEmailAndPassword } from 'firebase/auth'
+
+import { auth } from '../../firebase'
+
 import AuthLayout from '../../layouts/AuthLayout'
 import SignInForm from '../../components/SignInForm'
 
@@ -16,6 +20,15 @@ export const SignIn = (props) => {
 
   const methods = useForm()
   const { handleSubmit } = methods
+
+  const signIn = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential)
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
 
   return (
     <Box
@@ -29,7 +42,7 @@ export const SignIn = (props) => {
           <FormProvider
             {...methods}
           >
-            <SignInForm onSubmit={handleSubmit((data) => console.log(data))} />
+            <SignInForm onSubmit={handleSubmit((data) => signIn(data.email, data.password))} />
           </FormProvider>
       }
       />
