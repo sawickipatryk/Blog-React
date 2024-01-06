@@ -44,8 +44,6 @@ export const MainPage = (props) => {
 
   const slicedString = sliceString(string)
 
-  console.log(slicedString)
-
   return (
     <Box
       sx={{

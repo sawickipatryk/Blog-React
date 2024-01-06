@@ -4,12 +4,13 @@ import PropTypes from 'prop-types'
 import { Box, Grid, Typography, Container } from '@mui/material'
 import { Temporal } from '@js-temporal/polyfill'
 import theme from '../../theme'
+import post1 from './post1.jpg'
 
 const postsArray = [
   {
     id: 1,
     tilte: 'Creative photography ideas from smart devices',
-    img: 'https://pixabay.com/get/gda63d51bf6cd26fa869c928006af9fb3593fd6acb84ba8ab8ee29a7d43013902b094eb211c6d74ded96161a623c2a0c06031a8332e49f9cd7245a69dce94fe48_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -17,7 +18,7 @@ const postsArray = [
   {
     id: 2,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/g76ad50c9b1c25d1a7ec80f658928b1df12a62d9d63debffea66fae011d0748d857498bf716a0977feb99ab6562f8e33d2acdc7ac773a1217bca22f952f4c93fa_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -25,7 +26,7 @@ const postsArray = [
   {
     id: 3,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -35,7 +36,7 @@ const secondPostsArray = [
   {
     id: 1,
     tilte: 'Creative photography ideas from smart devices',
-    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -43,7 +44,7 @@ const secondPostsArray = [
   {
     id: 2,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/gfc4c2c355df84237ac4d06d2e90cce0a4e50f69333b03946ed94ab6d3861ba5d4262e416df46e268a7d797343c65d78ecc9edb15d91f679a19d3a8aed4307d28_1280.png',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -51,7 +52,7 @@ const secondPostsArray = [
   {
     id: 3,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -59,7 +60,7 @@ const secondPostsArray = [
   {
     id: 4,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/gfc4c2c355df84237ac4d06d2e90cce0a4e50f69333b03946ed94ab6d3861ba5d4262e416df46e268a7d797343c65d78ecc9edb15d91f679a19d3a8aed4307d28_1280.png',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -67,7 +68,7 @@ const secondPostsArray = [
   {
     id: 5,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/gfc4c2c355df84237ac4d06d2e90cce0a4e50f69333b03946ed94ab6d3861ba5d4262e416df46e268a7d797343c65d78ecc9edb15d91f679a19d3a8aed4307d28_1280.png',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
@@ -75,7 +76,7 @@ const secondPostsArray = [
   {
     id: 6,
     tilte: 'Have good food and good taste then enjoy reading',
-    img: 'https://pixabay.com/get/g4320663787ce2f923e1cdceb6c3e0d1f05c342d1c57d0d6df64f2d43c1d7c646fea40ce6f1c97377858503d66a82b1684ea6567841adb86a1cbd97c416bafc61_1280.jpg',
+    img: post1,
     author: 'Patryk Sawicki',
     text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum libero ipsum repellat aliquid enim molestias inventore tenetur at magni asperiores?',
     NewDate: Temporal.Now.plainDateISO().toString()
