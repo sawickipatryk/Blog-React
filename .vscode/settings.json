@@ -1,0 +1,52 @@
+{
+    "module-templates.engine": "handlebars",
+    "module-templates.templates": {
+        "react-component-mui": {
+            "displayName": "Next component MUI",
+            "defaultPath": "/components",
+            "folder": "{{pascal name}}",
+            "questions": {
+                "name": "Component name",
+            },
+            "files": [
+                {
+                    "name": "{{pascal name}}.js",
+                    "content": [
+                        "",
+                        "import { Box } from '@mui/material'",
+                        "",
+                        "export const {{pascal name}} = (props) => {",
+                        "  const {",
+                        "    sx,",
+                        "    ...otherProps",
+                        "  } = props",
+                        "",
+                        "  return (",
+                        "    <Box",
+                        "      sx=\\{{",
+                        "        ...sx",
+                        "      }}",
+                        "      {...otherProps}",
+                        "    >",
+                        "",
+                        "    </Box>",
+                        "  )",
+                        "}",
+                        "",
+                        "",
+                        "export default {{pascal name}}",
+                        ""
+                    ]
+                },
+                {
+                    "name": "index.js",
+                    "content": [
+                        "export * from './{{pascal name}}'",
+                        "export { default } from './{{pascal name}}'",
+                        ""
+                    ]
+                }
+            ]
+        },
+    }
+}
