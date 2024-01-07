@@ -14,6 +14,13 @@ import { auth } from '../../firebase'
 import AuthLayout from '../../layouts/AuthLayout'
 import SignUpForm from '../../components/SignUpForm'
 
+import { useDispatch } from 'react-redux'
+
+import {
+  createActionSetError,
+  createActionSetInfo
+} from '../../state/loaders'
+
 export const SignUp = (props) => {
   const {
     sx,
@@ -21,6 +28,7 @@ export const SignUp = (props) => {
   } = props
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const methods = useForm()
   const { handleSubmit } = methods
@@ -28,10 +36,10 @@ export const SignUp = (props) => {
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        dispatch(createActionSetInfo('Created Account Sucessfully. You are logged In!'))
         navigate('/')
-        console.log(userCredential)
       }).catch((error) => {
-        console.log(error)
+        dispatch(createActionSetError(error))
       })
   }
 
