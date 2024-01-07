@@ -39,10 +39,22 @@ export const MainPage = (props) => {
   const {
     sx,
     children,
+    posts,
     ...otherProps
   } = props
 
   const slicedString = sliceString(string)
+
+  const sliceArrays = (array) => {
+    const firstChunk = 3
+    const firstArray = array.slice(0, firstChunk)
+    const secondArray = array.slice(firstChunk, array.length)
+    return {
+      firstArray,
+      secondArray
+    }
+  }
+  const slicedArrays = sliceArrays(posts)
 
   return (
     <Box
@@ -120,7 +132,11 @@ export const MainPage = (props) => {
                     </Container>
 
                   </Box>
-                  <OurPosts/>
+                  <OurPosts
+                    posts={
+                      slicedArrays
+                  }
+                  />
                 </>
                 }
             />
@@ -133,7 +149,8 @@ export const MainPage = (props) => {
 
 MainPage.propTypes = {
   sx: PropTypes.object,
-  children: PropTypes.node
+  children: PropTypes.node,
+  posts: PropTypes.array
 }
 
 export default MainPage
