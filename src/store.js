@@ -2,10 +2,12 @@ import { createStore, combineReducers } from 'redux'
 
 import loadersReducer from './state/loaders'
 import authReducer from './state/auth'
+import postsReducer from './state/posts'
 
 const rootReducer = combineReducers({
   loaders: loadersReducer,
-  auth: authReducer
+  auth: authReducer,
+  posts: postsReducer
 })
 
 export const store = createStore(
