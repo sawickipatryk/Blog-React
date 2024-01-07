@@ -117,6 +117,7 @@ export const SignInForm = (props) => {
           />
         </Box>
         <Button
+          type={'submit'}
           sx={{
             width: '100%',
             color: 'white',
