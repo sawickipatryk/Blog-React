@@ -1,6 +1,6 @@
 export const SET_DATA = 'posts/SET_DATA'
 
-export const createActionSetCart = (data) => ({
+export const createActionSetPosts = (data) => ({
   type: SET_DATA,
   payload: { data }
 })
