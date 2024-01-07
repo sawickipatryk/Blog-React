@@ -98,7 +98,8 @@ export const SignInForm = (props) => {
             helperText={errors.email?.message}
             inputProps={{
               style: {
-                fontSize: '18px'
+                fontSize: '18px',
+                color: theme.palette.primary.main
               }
             }}
             InputLabelProps={{
@@ -118,7 +119,8 @@ export const SignInForm = (props) => {
             helperText={errors.password?.message}
             inputProps={{
               style: {
-                fontSize: '18px'
+                fontSize: '18px',
+                color: theme.palette.primary.main
               }
             }}
             InputLabelProps={{
@@ -138,7 +140,8 @@ export const SignInForm = (props) => {
             helperText={errors.repeatPassword?.message}
             inputProps={{
               style: {
-                fontSize: '18px'
+                fontSize: '18px',
+                color: theme.palette.primary.main
               }
             }}
             InputLabelProps={{
