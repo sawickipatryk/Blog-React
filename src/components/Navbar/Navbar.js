@@ -13,6 +13,11 @@ import {
 } from '../../state/auth'
 
 import {
+  createActionSetError,
+  createActionSetInfo
+} from '../../state/loaders'
+
+import {
   AppBar,
   Box,
   Toolbar,
@@ -37,21 +42,14 @@ const pages = [
   {
     id: 1,
     name: 'BLOG',
-    href: '#home'
+    href: '/'
   },
   {
     id: 2,
     name: 'ABOUT ME',
-    href: '#about'
+    href: '/about'
   }
 ]
-const settings = [
-  {
-    id: 1,
-    name: 'Logout'
-  }
-]
-
 export const Navbar = (props) => {
   // eslint-disable-next-line no-unused-vars
   const {
@@ -88,8 +86,10 @@ export const Navbar = (props) => {
     signOut(auth).then(() => {
       dispatch(createActionRemoveIsUserLoggedId())
       navigate('/')
-      console.log('sign out successfull')
-    }).catch(error => console.log(error))
+      dispatch(createActionSetInfo('You are logged in!'))
+    }).catch((error) => {
+      dispatch(createActionSetError(error))
+    })
   }
 
   return (
@@ -254,14 +254,16 @@ export const Navbar = (props) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
-                        {settings.map((setting) => (
-                          <MenuItem
-                            key={setting.id}
+                        <MenuItem
+                          onClick={userSignOut}
+                        >
+                          <Button
                             onClick={userSignOut}
+                            variant={'text'}
                           >
-                            <Typography textAlign={'center'}>{setting.name}</Typography>
-                          </MenuItem>
-                        ))}
+                            Log out
+                          </Button>
+                        </MenuItem>
                       </Menu>
                     </Box>
                     )
@@ -375,18 +377,16 @@ export const Navbar = (props) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
-                        {settings.map((setting) => (
-                          <MenuItem
-                            key={setting.id}
-                            onClick={handleCloseUserMenu}
+                        <MenuItem
+                          onClick={userSignOut}
+                        >
+                          <Button
+                            onClick={userSignOut}
+                            variant={'text'}
                           >
-                            <Typography
-                              onClick={userSignOut}
-                            >
-                              LOGOUT
-                            </Typography>
-                          </MenuItem>
-                        ))}
+                            Log out
+                          </Button>
+                        </MenuItem>
                       </Menu>
                     </Box>
                     )
