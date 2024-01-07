@@ -18,8 +18,11 @@ export const SignInForm = (props) => {
 
   const {
     register,
+    watch,
     formState: { errors }
   } = methods
+
+  const password = watch('password')
 
   const registeredEmailProps = register('email', {
     required: {
@@ -46,7 +49,8 @@ export const SignInForm = (props) => {
     minLength: {
       value: 6,
       message: 'Password should have 6 characters'
-    }
+    },
+    validate: (repeatPassword) => repeatPassword === password || 'Reapet password shoud be the same like password'
   })
 
   return (
@@ -147,6 +151,7 @@ export const SignInForm = (props) => {
           />
         </Box>
         <Button
+          type={'submit'}
           sx={{
             width: '100%',
             color: 'white',
