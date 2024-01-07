@@ -1,9 +1,11 @@
 import { createStore, combineReducers } from 'redux'
 
 import loadersReducer from './state/loaders'
+import authReducer from './state/auth'
 
 const rootReducer = combineReducers({
-  loaders: loadersReducer
+  loaders: loadersReducer,
+  auth: authReducer
 })
 
 export const store = createStore(
