@@ -5,6 +5,8 @@ import { Box, Typography, TextField, Button } from '@mui/material'
 import theme from '../../theme'
 import { useFormContext } from 'react-hook-form'
 
+import isEmail from 'validator/lib/isEmail'
+
 export const SignInForm = (props) => {
   const {
     sx,
@@ -23,7 +25,8 @@ export const SignInForm = (props) => {
     required: {
       value: true,
       message: 'email is required'
-    }
+    },
+    validate: (email) => isEmail(email) || 'Wrong Email'
   })
   const registeredPasswordProps = register('password', {
     required: {
