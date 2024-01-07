@@ -13,10 +13,12 @@ import {
   createActionSetUserId,
   createActionSetUserDisplayName,
   createActionSetUserEmail,
-  createActionSetUserAvatar
+  createActionSetUserAvatar,
+  createActionRemoveIsUserLoggedId
 } from './state/auth'
 
 import handleAsyncAction from './handleAsyncAction'
+import { Typography, Box } from '@mui/material'
 
 function App () {
   const dispatch = useDispatch()
@@ -24,6 +26,9 @@ function App () {
   const {
     isLoading
   } = useSelector((state) => state.loaders)
+  const {
+    isUserLoggedIn
+  } = useSelector((state) => state.auth)
 
   React.useEffect(() => {
     handleAsyncAction(async () => {
@@ -31,13 +36,14 @@ function App () {
       const listen = onAuthStateChanged(auth, (user) => {
         console.log(user)
         if (user) {
-          dispatch(createActionSetIsUserLoggedId(true))
+          console.log('true')
+          dispatch(createActionSetIsUserLoggedId())
           dispatch(createActionSetUserId(user.uid))
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
           dispatch(createActionSetUserEmail(user.email && user.email))
           dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
         } else {
-          dispatch(createActionSetIsUserLoggedId(false))
+          dispatch(createActionRemoveIsUserLoggedId())
         }
       })
     })
@@ -50,30 +56,86 @@ function App () {
         isLoading
       )
         ? (
-          <h1>LOADING</h1>
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              position: 'fixed',
+              zIndex: 999999999,
+              height: '100vh',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Typography
+              variant={'h1'}
+              sx={{
+                color: 'black'
+              }}
+            >LOADING.........
+            </Typography>
+          </Box>
+
           )
         : null
       }
-      <Routes>
-        <Route
-          path={'*'}
-          element={
-            <MainPage/>
-        }
-        />
-        <Route
-          path={'/login'}
-          element={
-            <SignIn/>
-        }
-        />
-        <Route
-          path={'/register'}
-          element={
-            <SignUp/>
-        }
-        />
-      </Routes>
+      {
+        (
+          isUserLoggedIn
+        )
+          ? (
+            <Routes>
+              <Route
+                path={'*'}
+                element={
+                  <MainPage/>
+          }
+              />
+              <Route
+                path={'/login'}
+                element={
+                  <SignIn/>
+          }
+              />
+              <Route
+                path={'/register'}
+                element={
+                  <SignUp/>
+          }
+              />
+            </Routes>
+            )
+          : null
+      }
+      {
+        (
+          !isUserLoggedIn
+        )
+          ? (
+            <Routes>
+              <Route
+                path={'*'}
+                element={
+                  <MainPage/>
+          }
+              />
+              <Route
+                path={'/login'}
+                element={
+                  <SignIn/>
+          }
+              />
+              <Route
+                path={'/register'}
+                element={
+                  <SignUp/>
+          }
+              />
+            </Routes>
+            )
+          : null
+      }
 
     </>
   )
