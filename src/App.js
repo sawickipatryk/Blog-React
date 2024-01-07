@@ -10,6 +10,10 @@ import { onAuthStateChanged } from 'firebase/auth'
 
 import { useDispatch, useSelector } from 'react-redux'
 
+import { createActionSetPosts } from './state/posts'
+
+import { getAll as getPosts } from './api/Ourposts/getAll'
+
 import {
   createActionSetIsUserLoggedId,
   createActionSetUserId,
@@ -39,6 +43,8 @@ function App () {
 
   } = useSelector((state) => state.auth)
 
+  const [posts, setPosts] = React.useState([])
+
   const dismissMessage = React.useCallback(() => {
     dispatch(createActionRemoveInfo())
     dispatch(createActionRemoveError())
@@ -59,6 +65,9 @@ function App () {
           dispatch(createActionRemoveIsUserLoggedId())
         }
       })
+      const posts = await getPosts()
+      setPosts(posts)
+      dispatch(createActionSetPosts(posts))
     })
   }, [dispatch])
 
@@ -129,7 +138,9 @@ function App () {
               <Route
                 path={'*'}
                 element={
-                  <MainPage/>
+                  <MainPage
+                    posts={posts}
+                  />
           }
               />
               <Route
@@ -157,7 +168,9 @@ function App () {
               <Route
                 path={'*'}
                 element={
-                  <MainPage/>
+                  <MainPage
+                    posts={posts}
+                  />
           }
               />
               <Route
