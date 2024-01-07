@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Box } from '@mui/material'
 
+import { useNavigate } from 'react-router-dom'
+
 import { useForm, FormProvider } from 'react-hook-form'
 
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -18,12 +20,15 @@ export const SignUp = (props) => {
     ...otherProps
   } = props
 
+  const navigate = useNavigate()
+
   const methods = useForm()
   const { handleSubmit } = methods
 
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        navigate('/')
         console.log(userCredential)
       }).catch((error) => {
         console.log(error)
