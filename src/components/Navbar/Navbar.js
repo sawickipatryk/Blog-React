@@ -1,6 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { useNavigate } from 'react-router-dom'
+
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
+
+import { useSelector, useDispatch } from 'react-redux'
+
+import {
+  createActionRemoveIsUserLoggedId
+} from '../../state/auth'
+
 import {
   AppBar,
   Box,
@@ -38,13 +49,11 @@ const settings = [
   {
     id: 1,
     name: 'Logout'
-
   }
 ]
 
 export const Navbar = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const [isLogged, setIsLogged] = React.useState(false)
   const {
     sx,
     ...otherProps
@@ -52,6 +61,13 @@ export const Navbar = (props) => {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const {
+    isUserLoggedIn
+  } = useSelector((state) => state.auth)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
@@ -66,6 +82,14 @@ export const Navbar = (props) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const userSignOut = () => {
+    signOut(auth).then(() => {
+      dispatch(createActionRemoveIsUserLoggedId())
+      navigate('/')
+      console.log('sign out successfull')
+    }).catch(error => console.log(error))
   }
 
   return (
@@ -194,7 +218,7 @@ export const Navbar = (props) => {
                   LOGO
                 </Typography>
               </Box> {
-                isLogged
+                isUserLoggedIn
                   ? (
                     <Box sx={{ flexGrow: 0 }}>
                       <Tooltip title={'Open settings'}>
@@ -233,7 +257,7 @@ export const Navbar = (props) => {
                         {settings.map((setting) => (
                           <MenuItem
                             key={setting.id}
-                            onClick={handleCloseUserMenu}
+                            onClick={userSignOut}
                           >
                             <Typography textAlign={'center'}>{setting.name}</Typography>
                           </MenuItem>
@@ -315,7 +339,7 @@ export const Navbar = (props) => {
                 ))}
               </Box>
               {
-                isLogged
+                isUserLoggedIn
                   ? (
                     <Box sx={{ flexGrow: 0 }}>
                       <Tooltip title={'Open settings'}>
@@ -356,7 +380,11 @@ export const Navbar = (props) => {
                             key={setting.id}
                             onClick={handleCloseUserMenu}
                           >
-                            <Typography textAlign={'center'}>{setting.name}</Typography>
+                            <Typography
+                              onClick={userSignOut}
+                            >
+                              LOGOUT
+                            </Typography>
                           </MenuItem>
                         ))}
                       </Menu>
