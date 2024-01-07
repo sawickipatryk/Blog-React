@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Box, Typography, TextField, Button } from '@mui/material'
 import theme from '../../theme'
+import { useFormContext } from 'react-hook-form'
 
 export const SignInForm = (props) => {
   const {
@@ -10,6 +11,30 @@ export const SignInForm = (props) => {
     onSubmit,
     ...otherProps
   } = props
+
+  const methods = useFormContext()
+
+  const {
+    register,
+    formState: { errors }
+  } = methods
+
+  const registeredEmailProps = register('email', {
+    required: {
+      value: true,
+      message: 'email is required'
+    }
+  })
+  const registeredPasswordProps = register('password', {
+    required: {
+      value: true,
+      message: 'password is required'
+    },
+    minLength: {
+      value: 6,
+      message: 'Password should have 6 characters'
+    }
+  })
 
   return (
     <Box
@@ -49,11 +74,11 @@ export const SignInForm = (props) => {
           }}
         >
           <TextField
-            error={false}
+            error={!!errors.email}
             id={'email'}
             label={'Email'}
             defaultValue={''}
-            helperText={''}
+            helperText={errors.email?.message}
             inputProps={{
               style: {
                 fontSize: '18px'
@@ -65,14 +90,15 @@ export const SignInForm = (props) => {
                 color: theme.palette.primary.main
               }
             }}
+            {...registeredEmailProps}
           />
           <TextField
-            error={false}
+            error={!!errors.password}
             type={'password'}
             id={'password'}
             label={'Password'}
             defaultValue={''}
-            helperText={''}
+            helperText={errors.password?.message}
             inputProps={{
               style: {
                 fontSize: '18px'
@@ -84,6 +110,7 @@ export const SignInForm = (props) => {
                 color: theme.palette.primary.main
               }
             }}
+            {...registeredPasswordProps}
           />
         </Box>
         <Button
