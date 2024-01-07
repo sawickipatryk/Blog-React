@@ -7,7 +7,9 @@ import { auth } from './firebase'
 
 import { Routes, Route } from 'react-router-dom'
 import { onAuthStateChanged } from 'firebase/auth'
+
 import { useDispatch, useSelector } from 'react-redux'
+
 import {
   createActionSetIsUserLoggedId,
   createActionSetUserId,
@@ -18,25 +20,36 @@ import {
 } from './state/auth'
 
 import handleAsyncAction from './handleAsyncAction'
+import Message from './components/Message'
 import { Typography, Box } from '@mui/material'
+import { createActionRemoveInfo, createActionRemoveError } from './state/loaders'
 
 function App () {
   const dispatch = useDispatch()
 
   const {
-    isLoading
+    isLoading,
+    isInfoDisplayed,
+    infoMessage,
+    hasError,
+    errorMessage
   } = useSelector((state) => state.loaders)
   const {
     isUserLoggedIn
+
   } = useSelector((state) => state.auth)
+
+  const dismissMessage = React.useCallback(() => {
+    dispatch(createActionRemoveInfo())
+    dispatch(createActionRemoveError())
+    window.scrollTo(0, 0)
+  }, [dispatch])
 
   React.useEffect(() => {
     handleAsyncAction(async () => {
       // eslint-disable-next-line no-unused-vars
       const listen = onAuthStateChanged(auth, (user) => {
-        console.log(user)
         if (user) {
-          console.log('true')
           dispatch(createActionSetIsUserLoggedId())
           dispatch(createActionSetUserId(user.uid))
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
@@ -76,6 +89,33 @@ function App () {
             >LOADING.........
             </Typography>
           </Box>
+
+          )
+        : null
+      }
+      {
+      (
+        isInfoDisplayed
+      )
+        ? (
+          <Message
+            message={infoMessage}
+            onButtonClick={dismissMessage}
+            iconVariant={'info'}
+          />
+          )
+        : null
+      }
+      {
+      (
+        hasError
+      )
+        ? (
+          <Message
+            message={errorMessage}
+            onButtonClick={dismissMessage}
+            iconVariant={'error'}
+          />
 
           )
         : null
