@@ -72,8 +72,6 @@ export const MainPage = (props) => {
   }
   const slicedArrays = sliceArrays(posts)
 
-  console.log(slicedArrays)
-
   return (
     <Box
       sx={{
