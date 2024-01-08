@@ -70,12 +70,12 @@ function App () {
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
           dispatch(createActionSetUserEmail(user.email && user.email))
           dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
+          const isAdmin = await checkIsAdmin(user.uid)
+          if (isAdmin) {
+            dispatch(createActionSetUserIsAdmin())
+          }
         } else {
           dispatch(createActionRemoveIsUserLoggedId())
-        }
-        const isAdmin = await checkIsAdmin(user.uid)
-        if (isAdmin) {
-          dispatch(createActionSetUserIsAdmin())
         }
       })
 
