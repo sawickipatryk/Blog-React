@@ -7,33 +7,30 @@ import MainLayout from '../../layouts/MainLayout'
 import Hero from '../../components/Hero'
 import OurPosts from '../../components/OurPosts'
 
-import hero from './hero.jpg'
 import theme from '../../theme'
 
-const string = 'Have good food and good taste then enjoy reading'
+// const sliceString = (string) => {
+//   const arrayOfWords = string.split(' ')
 
-const sliceString = (string) => {
-  const arrayOfWords = string.split(' ')
+//   const upperCase = arrayOfWords.map((string) => {
+//     const result = string.charAt(0).toUpperCase() + string.slice(1)
+//     return result
+//   })
 
-  const upperCase = arrayOfWords.map((string) => {
-    const result = string.charAt(0).toUpperCase() + string.slice(1)
-    return result
-  })
+//   const firstFourWords = upperCase.slice(0, 4)
+//   const secondThreeWords = upperCase.slice(4, 7)
+//   const lastTwoWords = upperCase.slice(7)
 
-  const firstFourWords = upperCase.slice(0, 4)
-  const secondThreeWords = upperCase.slice(4, 7)
-  const lastTwoWords = upperCase.slice(7)
+//   const firstFourWordsString = firstFourWords.join(' ')
+//   const secondThreeWordsString = secondThreeWords.join(' ')
+//   const lastTwoWordsString = lastTwoWords.join(' ')
 
-  const firstFourWordsString = firstFourWords.join(' ')
-  const secondThreeWordsString = secondThreeWords.join(' ')
-  const lastTwoWordsString = lastTwoWords.join(' ')
-
-  return {
-    firstFourWordsString,
-    secondThreeWordsString,
-    lastTwoWordsString
-  }
-}
+//   return {
+//     firstFourWordsString,
+//     secondThreeWordsString,
+//     lastTwoWordsString
+//   }
+// }
 
 export const MainPage = (props) => {
   const {
@@ -43,18 +40,39 @@ export const MainPage = (props) => {
     ...otherProps
   } = props
 
-  const slicedString = sliceString(string)
-
   const sliceArrays = (array) => {
-    const firstChunk = 3
-    const firstArray = array.slice(0, firstChunk)
+    const firstChunk = 4
+    const firstItemOfArray = array[0]
+    const firstArray = array.slice(1, firstChunk)
     const secondArray = array.slice(firstChunk, array.length)
+
+    const sliceString = firstItemOfArray?.tilte.split(' ')
+
+    const upperCase = sliceString?.map((string) => {
+      const result = string.charAt(0).toUpperCase() + string.slice(1)
+      return result
+    })
+
+    const firstFourWords = upperCase?.slice(0, 4)
+    const secondThreeWords = upperCase?.slice(4, 7)
+    const lastTwoWords = upperCase?.slice(7)
+
+    const firstFourWordsString = firstFourWords?.join(' ')
+    const secondThreeWordsString = secondThreeWords?.join(' ')
+    const lastTwoWordsString = lastTwoWords?.join(' ')
+
     return {
+      firstItemOfArray,
       firstArray,
-      secondArray
+      secondArray,
+      firstFourWordsString,
+      secondThreeWordsString,
+      lastTwoWordsString
     }
   }
   const slicedArrays = sliceArrays(posts)
+
+  console.log(slicedArrays)
 
   return (
     <Box
@@ -72,7 +90,7 @@ export const MainPage = (props) => {
                   <Box
                     sx={{
                       position: 'relative',
-                      backgroundImage: `url(${hero})`,
+                      backgroundImage: `url(${slicedArrays.firstItemOfArray?.img})`,
                       width: '100%',
                       height: '80vh',
                       backgroundPosition: 'center',
@@ -91,42 +109,61 @@ export const MainPage = (props) => {
                           maxWidth: '500px'
                         }}
                       >
-                        <Typography
-                          fontWeight={theme.typography.fontWeightMedium}
-                          variant={'h1'}
-                          sx={{
-                            padding: '0px 10px',
-                            backgroundColor: 'white',
-                            border: '2px solid black',
-                            display: 'inline-block'
-                          }}
-                        >
-                          {slicedString.firstFourWordsString}
-                        </Typography>
-                        <Typography
-                          fontWeight={theme.typography.fontWeightMedium}
-                          variant={'h1'}
-                          sx={{
-                            padding: '0px 10px',
-                            backgroundColor: 'white',
-                            border: '2px solid black',
-                            display: 'inline-block'
-                          }}
-                        >
-                          {slicedString.secondThreeWordsString}
-                        </Typography>
-                        <Typography
-                          fontWeight={theme.typography.fontWeightMedium}
-                          variant={'h1'}
-                          sx={{
-                            padding: '0px 10px',
-                            backgroundColor: 'white',
-                            border: '2px solid black',
-                            display: 'inline-block'
-                          }}
-                        >
-                          {slicedString.lastTwoWordsString}
-                        </Typography>
+                        {
+                          slicedArrays?.firstFourWordsString
+                            ? (
+                              <Typography
+                                fontWeight={theme.typography.fontWeightMedium}
+                                variant={'h1'}
+                                sx={{
+                                  padding: '0px 10px',
+                                  backgroundColor: 'white',
+                                  border: '2px solid black',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                {slicedArrays?.firstFourWordsString}
+                              </Typography>
+                              )
+                            : null
+                        }
+                        {
+                          slicedArrays?.secondThreeWordsString
+                            ? (
+                              <Typography
+                                fontWeight={theme.typography.fontWeightMedium}
+                                variant={'h1'}
+                                sx={{
+                                  padding: '0px 10px',
+                                  backgroundColor: 'white',
+                                  border: '2px solid black',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                {slicedArrays?.secondThreeWordsString}
+                              </Typography>
+                              )
+                            : null
+                        }
+                        {
+                          slicedArrays?.lastTwoWordsString
+                            ? (
+                              <Typography
+                                fontWeight={theme.typography.fontWeightMedium}
+                                variant={'h1'}
+                                sx={{
+                                  padding: '0px 10px',
+                                  backgroundColor: 'white',
+                                  border: '2px solid black',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                {slicedArrays?.lastTwoWordsString}
+                              </Typography>
+                              )
+                            : null
+                        }
+
                       </Box>
 
                     </Container>
