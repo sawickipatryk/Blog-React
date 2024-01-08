@@ -8,6 +8,8 @@ const SET_USER_EMAIL = 'auth/SET_USER_EMAIL'
 const REMOVE_USER_EMAIL = 'auth/REMOVE_USER_EMAIL'
 const SET_USER_AVATAR = 'auth/SET_USER_AVATAR'
 const REMOVE_USER_AVATAR = 'auth/REMOVE_USER_AVATAR'
+const SET_USER_IS_ADMIN = 'auth/SET_USER_IS_ADMIN '
+const REMOVE_USER_IS_ADMIN = 'auth/REMOVE_USER_IS_ADMIN'
 
 export const createActionSetIsUserLoggedId = () => ({
   type: SET_IS_USER_LOGGED_IN
@@ -47,13 +49,20 @@ export const createActionRemoveUserAvatar = (message) => ({
   type: REMOVE_USER_AVATAR,
   payload: { message }
 })
+export const createActionSetUserIsAdmin = () => ({
+  type: SET_USER_IS_ADMIN
+})
+export const createActionRemoveUserIsAdmin = () => ({
+  type: REMOVE_USER_IS_ADMIN
+})
 
 const initialState = {
   isUserLoggedIn: false,
   userId: '',
   userDisplayName: '',
   userEmail: '',
-  userAvatar: ''
+  userAvatar: '',
+  isAdmin: false
 }
 
 export const reducer = (state = initialState, action) => {
@@ -107,6 +116,16 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         userAvatar: initialState.userAvatar
+      }
+    case SET_USER_IS_ADMIN:
+      return {
+        ...state,
+        isAdmin: true
+      }
+    case REMOVE_USER_IS_ADMIN:
+      return {
+        ...state,
+        isAdmin: false
       }
     default:
       return state

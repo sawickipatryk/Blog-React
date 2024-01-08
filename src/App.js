@@ -20,7 +20,9 @@ import {
   createActionSetUserDisplayName,
   createActionSetUserEmail,
   createActionSetUserAvatar,
-  createActionRemoveIsUserLoggedId
+  createActionRemoveIsUserLoggedId,
+  createActionSetUserIsAdmin,
+  createActionRemoveUserIsAdmin
 } from './state/auth'
 
 import handleAsyncAction from './handleAsyncAction'
@@ -39,7 +41,8 @@ function App () {
     errorMessage
   } = useSelector((state) => state.loaders)
   const {
-    isUserLoggedIn
+    isUserLoggedIn,
+    isAdmin
 
   } = useSelector((state) => state.auth)
 
@@ -51,6 +54,8 @@ function App () {
     window.scrollTo(0, 0)
   }, [dispatch])
 
+  console.log(isAdmin)
+
   React.useEffect(() => {
     handleAsyncAction(async () => {
       // eslint-disable-next-line no-unused-vars
@@ -61,8 +66,10 @@ function App () {
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
           dispatch(createActionSetUserEmail(user.email && user.email))
           dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
+          dispatch(createActionSetUserIsAdmin())
         } else {
           dispatch(createActionRemoveIsUserLoggedId())
+          dispatch(createActionRemoveUserIsAdmin())
         }
       })
       const posts = await getPosts()

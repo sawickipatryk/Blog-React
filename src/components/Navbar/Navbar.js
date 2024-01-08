@@ -9,7 +9,8 @@ import { signOut } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux'
 
 import {
-  createActionRemoveIsUserLoggedId
+  createActionRemoveIsUserLoggedId,
+  createActionRemoveUserIsAdmin
 } from '../../state/auth'
 
 import {
@@ -85,6 +86,7 @@ export const Navbar = (props) => {
   const userSignOut = () => {
     signOut(auth).then(() => {
       dispatch(createActionRemoveIsUserLoggedId())
+      dispatch(createActionRemoveUserIsAdmin())
       navigate('/')
       dispatch(createActionSetInfo('You are logged in!'))
     }).catch((error) => {
