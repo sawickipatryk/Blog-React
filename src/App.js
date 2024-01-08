@@ -3,6 +3,11 @@ import React from 'react'
 import MainPage from './pages/MainPage/MainPage'
 import SignIn from './pages/SignIn/SignIn'
 import SignUp from './pages/SignUp/SignUp'
+import PageAdminMain from './pages/PageAdminMain/PageAdminMain'
+import PageAdminBlogs from './pages/PageAdminBlogs/PageAdminBlogs'
+import PageAdminBlogsNew from './pages/PageAdminBlogsNew/PageAdminBlogsNew'
+import PageAdminBlogsEdit from './pages/PageAdminBlogsEdit/PageAdminBlogsEdit'
+
 import { auth } from './firebase'
 
 import { Routes, Route } from 'react-router-dom'
@@ -65,12 +70,12 @@ function App () {
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
           dispatch(createActionSetUserEmail(user.email && user.email))
           dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
-          const isAdmin = await checkIsAdmin(user.uid)
-          if (isAdmin) {
-            dispatch(createActionSetUserIsAdmin())
-          }
         } else {
           dispatch(createActionRemoveIsUserLoggedId())
+        }
+        const isAdmin = await checkIsAdmin(user.uid)
+        if (isAdmin) {
+          dispatch(createActionSetUserIsAdmin())
         }
       })
 
@@ -145,23 +150,39 @@ function App () {
           ? (
             <Routes>
               <Route
-                path={'*'}
-                element={
-                  <MainPage
-                    posts={posts}
-                  />
-          }
-              />
-              <Route
                 path={'/login'}
-                element={
-                  <SignIn/>
-          }
+                element={<SignIn/>}
               />
               <Route
                 path={'/register'}
-                element={
-                  <SignUp/>
+                element={<SignUp/>}
+              />
+              {
+                isAdmin
+                  ? (
+                    <Route
+                      path={'/admin'}
+                      element={<PageAdminMain/>}
+                    >
+                      <Route
+                        path={'blogs'}
+                        element={<PageAdminBlogs/>}
+                      />
+                      <Route
+                        path={'blogs/new'}
+                        element={<PageAdminBlogsNew/>}
+                      />
+                      <Route
+                        path={'blogs/:blogId'}
+                        element={<PageAdminBlogsEdit/>}
+                      />
+                    </Route>
+                    )
+                  : null
+              }
+              <Route
+                path={'*'}
+                element={<MainPage posts={posts}/>
           }
               />
             </Routes>
@@ -175,24 +196,16 @@ function App () {
           ? (
             <Routes>
               <Route
-                path={'*'}
-                element={
-                  <MainPage
-                    posts={posts}
-                  />
-          }
-              />
-              <Route
                 path={'/login'}
-                element={
-                  <SignIn/>
-          }
+                element={<SignIn/>}
               />
               <Route
                 path={'/register'}
-                element={
-                  <SignUp/>
-          }
+                element={<SignUp/>}
+              />
+              <Route
+                path={'*'}
+                element={<MainPage posts={posts} />}
               />
             </Routes>
             )

@@ -39,7 +39,7 @@ export const SignUp = (props) => {
         dispatch(createActionSetInfo('Created Account Sucessfully. You are logged In!'))
         navigate('/')
       }).catch((error) => {
-        dispatch(createActionSetError(error))
+        dispatch(createActionSetError(error.message))
       })
   }
 
