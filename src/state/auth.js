@@ -8,7 +8,7 @@ const SET_USER_EMAIL = 'auth/SET_USER_EMAIL'
 const REMOVE_USER_EMAIL = 'auth/REMOVE_USER_EMAIL'
 const SET_USER_AVATAR = 'auth/SET_USER_AVATAR'
 const REMOVE_USER_AVATAR = 'auth/REMOVE_USER_AVATAR'
-const SET_USER_IS_ADMIN = 'auth/SET_USER_IS_ADMIN '
+const SET_USER_IS_ADMIN = 'admin/SET_USER_IS_ADMIN '
 const REMOVE_USER_IS_ADMIN = 'auth/REMOVE_USER_IS_ADMIN'
 
 export const createActionSetIsUserLoggedId = () => ({

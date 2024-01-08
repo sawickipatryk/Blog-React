@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createActionSetPosts } from './state/posts'
 
 import { getAll as getPosts } from './api/Ourposts/getAll'
+import { isAdmin as checkIsAdmin } from './api/admins/isAdmin'
 
 import {
   createActionSetIsUserLoggedId,
@@ -21,8 +22,7 @@ import {
   createActionSetUserEmail,
   createActionSetUserAvatar,
   createActionRemoveIsUserLoggedId,
-  createActionSetUserIsAdmin,
-  createActionRemoveUserIsAdmin
+  createActionSetUserIsAdmin
 } from './state/auth'
 
 import handleAsyncAction from './handleAsyncAction'
@@ -43,7 +43,6 @@ function App () {
   const {
     isUserLoggedIn,
     isAdmin
-
   } = useSelector((state) => state.auth)
 
   const [posts, setPosts] = React.useState([])
@@ -59,19 +58,22 @@ function App () {
   React.useEffect(() => {
     handleAsyncAction(async () => {
       // eslint-disable-next-line no-unused-vars
-      const listen = onAuthStateChanged(auth, (user) => {
+      const listen = onAuthStateChanged(auth, async (user) => {
         if (user) {
           dispatch(createActionSetIsUserLoggedId())
           dispatch(createActionSetUserId(user.uid))
           dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
           dispatch(createActionSetUserEmail(user.email && user.email))
           dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
-          dispatch(createActionSetUserIsAdmin())
+          const isAdmin = await checkIsAdmin(user.uid)
+          if (isAdmin) {
+            dispatch(createActionSetUserIsAdmin())
+          }
         } else {
           dispatch(createActionRemoveIsUserLoggedId())
-          dispatch(createActionRemoveUserIsAdmin())
         }
       })
+
       const posts = await getPosts()
       setPosts(posts)
       dispatch(createActionSetPosts(posts))
