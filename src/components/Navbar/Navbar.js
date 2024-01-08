@@ -65,7 +65,8 @@ export const Navbar = (props) => {
   const navigate = useNavigate()
 
   const {
-    isUserLoggedIn
+    isUserLoggedIn,
+    isAdmin
   } = useSelector((state) => state.auth)
 
   const handleOpenNavMenu = (event) => {
@@ -256,8 +257,24 @@ export const Navbar = (props) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
+                        {
+                          isAdmin
+                            ? (
+                              <MenuItem
+                                onClick={handleCloseUserMenu}
+                              >
+                                <Button
+                                  href={'/admin'}
+                                  variant={'text'}
+                                >
+                                  Panel Admin
+                                </Button>
+                              </MenuItem>
+                              )
+                            : null
+                        }
                         <MenuItem
-                          onClick={userSignOut}
+                          onClick={handleCloseUserMenu}
                         >
                           <Button
                             onClick={userSignOut}
@@ -379,8 +396,24 @@ export const Navbar = (props) => {
                         open={Boolean(anchorElUser)}
                         onClose={handleCloseUserMenu}
                       >
+                        {
+                          isAdmin
+                            ? (
+                              <MenuItem
+                                onClick={handleCloseUserMenu}
+                              >
+                                <Button
+                                  href={'/admin'}
+                                  variant={'text'}
+                                >
+                                  Panel Admin
+                                </Button>
+                              </MenuItem>
+                              )
+                            : null
+                        }
                         <MenuItem
-                          onClick={userSignOut}
+                          onClick={handleCloseUserMenu}
                         >
                           <Button
                             onClick={userSignOut}
