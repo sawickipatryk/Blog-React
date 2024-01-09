@@ -34,61 +34,61 @@ export const OurPosts = (props) => {
           }}
         >
           {
-          posts && posts.firstArray
-            .map((post) => {
-              return (
-                <Grid
-                  key={post.id}
-                  item
-                >
-                  <Box
-                    sx={{
-                      position: 'relative',
-                      backgroundImage: `url(${post.img})`,
-                      height: '280px',
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      display: 'flex',
-                      alignItems: 'flex-end',
-                      padding: '10px'
+           posts && posts.firstArray && posts.firstArray
+             .map((post) => {
+               return (
+                 <Grid
+                   key={post.id}
+                   item
+                 >
+                   <Box
+                     sx={{
+                       position: 'relative',
+                       backgroundImage: `url(${post.img})`,
+                       height: '280px',
+                       backgroundPosition: 'center',
+                       backgroundSize: 'cover',
+                       backgroundRepeat: 'no-repeat',
+                       display: 'flex',
+                       alignItems: 'flex-end',
+                       padding: '10px'
 
-                    }}
-                  >
-                    <Box
-                      color={'white'}
-                    >
-                      <Typography
-                        variant={'h6'}
-                        sx={{
-                          maxWidth: '350px'
-                        }}
-                      >
-                        {post.tilte}
-                      </Typography>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between'
-                        }}
-                      >
-                        <Typography
-                          variant={'caption'}
-                        >
-                          {post.author}
-                        </Typography>
-                        <Typography
-                          variant={'caption'}
-                        >
-                          {post.NewDate}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Grid>
-              )
-            })
+                     }}
+                   >
+                     <Box
+                       color={'white'}
+                     >
+                       <Typography
+                         variant={'h6'}
+                         sx={{
+                           maxWidth: '350px'
+                         }}
+                       >
+                         {post.tilte}
+                       </Typography>
+                       <Box
+                         sx={{
+                           display: 'flex',
+                           alignItems: 'center',
+                           justifyContent: 'space-between'
+                         }}
+                       >
+                         <Typography
+                           variant={'caption'}
+                         >
+                           {post.author}
+                         </Typography>
+                         <Typography
+                           variant={'caption'}
+                         >
+                           {post.NewDate}
+                         </Typography>
+                       </Box>
+                     </Box>
+                   </Box>
+                 </Grid>
+               )
+             })
         }
         </Grid>
         <Typography
@@ -104,7 +104,7 @@ export const OurPosts = (props) => {
           container
         >
           {
-           posts && posts.secondArray.map((post) => {
+           posts && posts.secondArray && posts.secondArray.map((post) => {
              return (
                <Grid
                  key={post.id}

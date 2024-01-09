@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, Typography, Container } from '@mui/material'
+import { Box, Container, Typography } from '@mui/material'
 
 import MainLayout from '../../layouts/MainLayout'
 import Hero from '../../components/Hero'
@@ -9,68 +9,59 @@ import OurPosts from '../../components/OurPosts'
 
 import theme from '../../theme'
 
-// const sliceString = (string) => {
-//   const arrayOfWords = string.split(' ')
-
-//   const upperCase = arrayOfWords.map((string) => {
-//     const result = string.charAt(0).toUpperCase() + string.slice(1)
-//     return result
-//   })
-
-//   const firstFourWords = upperCase.slice(0, 4)
-//   const secondThreeWords = upperCase.slice(4, 7)
-//   const lastTwoWords = upperCase.slice(7)
-
-//   const firstFourWordsString = firstFourWords.join(' ')
-//   const secondThreeWordsString = secondThreeWords.join(' ')
-//   const lastTwoWordsString = lastTwoWords.join(' ')
-
-//   return {
-//     firstFourWordsString,
-//     secondThreeWordsString,
-//     lastTwoWordsString
-//   }
-// }
+import { useSelector } from 'react-redux'
 
 export const MainPage = (props) => {
   const {
+    data
+  } = useSelector((state) => state.posts)
+
+  const {
     sx,
     children,
-    posts,
     ...otherProps
   } = props
 
-  const sliceArrays = (array) => {
+  const sliceArray = (array) => {
     const firstChunk = 4
-    const firstItemOfArray = array[0]
-    const firstArray = array.slice(1, firstChunk)
-    const secondArray = array.slice(firstChunk, array.length)
-
-    const sliceString = firstItemOfArray?.tilte.split(' ')
-
-    const upperCase = sliceString?.map((string) => {
-      const result = string.charAt(0).toUpperCase() + string.slice(1)
-      return result
-    })
-
-    const firstFourWords = upperCase?.slice(0, 4)
-    const secondThreeWords = upperCase?.slice(4, 7)
-    const lastTwoWords = upperCase?.slice(7)
-
-    const firstFourWordsString = firstFourWords?.join(' ')
-    const secondThreeWordsString = secondThreeWords?.join(' ')
-    const lastTwoWordsString = lastTwoWords?.join(' ')
+    const firstItemOfArray = array && array[0]
+    const firstArray = array && array.slice(1, firstChunk)
+    const secondArray = array && array.slice(firstChunk, array.length)
 
     return {
       firstItemOfArray,
       firstArray,
-      secondArray,
+      secondArray
+    }
+  }
+  const slicedArray = sliceArray(data)
+
+  const sliceString = (array) => {
+    const slicedArray = array.firstItemOfArray?.tilte
+
+    const slicedString = slicedArray && slicedArray.split(' ')
+
+    const upperCase = slicedString && slicedString.map((string) => {
+      const result = string.charAt(0).toUpperCase() + string.slice(1)
+      return result
+    })
+
+    const firstFourWords = upperCase && upperCase.slice(0, 4)
+    const secondThreeWords = upperCase && upperCase.slice(4, 7)
+    const lastTwoWords = upperCase && upperCase.slice(7)
+
+    const firstFourWordsString = firstFourWords && firstFourWords.join(' ')
+    const secondThreeWordsString = secondThreeWords && secondThreeWords.join(' ')
+    const lastTwoWordsString = lastTwoWords && lastTwoWords.join(' ')
+
+    return {
       firstFourWordsString,
       secondThreeWordsString,
       lastTwoWordsString
     }
   }
-  const slicedArrays = sliceArrays(posts)
+
+  const readyArraysWithSlicedString = sliceString(slicedArray)
 
   return (
     <Box
@@ -88,7 +79,7 @@ export const MainPage = (props) => {
                   <Box
                     sx={{
                       position: 'relative',
-                      backgroundImage: `url(${slicedArrays.firstItemOfArray?.img})`,
+                      backgroundImage: `url(${slicedArray.firstItemOfArray?.img})`,
                       width: '100%',
                       height: '80vh',
                       backgroundPosition: 'center',
@@ -108,7 +99,7 @@ export const MainPage = (props) => {
                         }}
                       >
                         {
-                          slicedArrays?.firstFourWordsString
+                          readyArraysWithSlicedString?.firstFourWordsString
                             ? (
                               <Typography
                                 fontWeight={theme.typography.fontWeightMedium}
@@ -120,13 +111,13 @@ export const MainPage = (props) => {
                                   display: 'inline-block'
                                 }}
                               >
-                                {slicedArrays?.firstFourWordsString}
+                                {readyArraysWithSlicedString?.firstFourWordsString}
                               </Typography>
                               )
                             : null
                         }
                         {
-                          slicedArrays?.secondThreeWordsString
+                          readyArraysWithSlicedString?.secondThreeWordsString
                             ? (
                               <Typography
                                 fontWeight={theme.typography.fontWeightMedium}
@@ -138,13 +129,13 @@ export const MainPage = (props) => {
                                   display: 'inline-block'
                                 }}
                               >
-                                {slicedArrays?.secondThreeWordsString}
+                                {readyArraysWithSlicedString?.secondThreeWordsString}
                               </Typography>
                               )
                             : null
                         }
                         {
-                          slicedArrays?.lastTwoWordsString
+                          readyArraysWithSlicedString?.lastTwoWordsString
                             ? (
                               <Typography
                                 fontWeight={theme.typography.fontWeightMedium}
@@ -156,7 +147,7 @@ export const MainPage = (props) => {
                                   display: 'inline-block'
                                 }}
                               >
-                                {slicedArrays?.lastTwoWordsString}
+                                { readyArraysWithSlicedString?.lastTwoWordsString}
                               </Typography>
                               )
                             : null
@@ -168,9 +159,7 @@ export const MainPage = (props) => {
 
                   </Box>
                   <OurPosts
-                    posts={
-                      slicedArrays
-                  }
+                    posts={slicedArray}
                   />
                 </>
                 }
@@ -184,8 +173,7 @@ export const MainPage = (props) => {
 
 MainPage.propTypes = {
   sx: PropTypes.object,
-  children: PropTypes.node,
-  posts: PropTypes.array
+  children: PropTypes.node
 }
 
 export default MainPage

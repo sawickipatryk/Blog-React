@@ -50,37 +50,31 @@ function App () {
     isAdmin
   } = useSelector((state) => state.auth)
 
-  const [posts, setPosts] = React.useState([])
-
   const dismissMessage = React.useCallback(() => {
     dispatch(createActionRemoveInfo())
     dispatch(createActionRemoveError())
     window.scrollTo(0, 0)
   }, [dispatch])
 
-  console.log(isAdmin)
-
   React.useEffect(() => {
     handleAsyncAction(async () => {
       // eslint-disable-next-line no-unused-vars
       const listen = onAuthStateChanged(auth, async (user) => {
         if (user) {
-          dispatch(createActionSetIsUserLoggedId())
           dispatch(createActionSetUserId(user.uid))
-          dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
-          dispatch(createActionSetUserEmail(user.email && user.email))
-          dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
           const isAdmin = await checkIsAdmin(user.uid)
           if (isAdmin) {
             dispatch(createActionSetUserIsAdmin())
           }
+          dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
+          dispatch(createActionSetUserEmail(user.email && user.email))
+          dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
+          dispatch(createActionSetIsUserLoggedId())
         } else {
           dispatch(createActionRemoveIsUserLoggedId())
         }
       })
-
       const posts = await getPosts()
-      setPosts(posts)
       dispatch(createActionSetPosts(posts))
     })
   }, [dispatch])
@@ -182,7 +176,7 @@ function App () {
               }
               <Route
                 path={'*'}
-                element={<MainPage posts={posts}/>
+                element={<MainPage/>
           }
               />
             </Routes>
@@ -205,7 +199,7 @@ function App () {
               />
               <Route
                 path={'*'}
-                element={<MainPage posts={posts} />}
+                element={<MainPage />}
               />
             </Routes>
             )
