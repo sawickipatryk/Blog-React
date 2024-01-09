@@ -57,26 +57,27 @@ function App () {
   }, [dispatch])
 
   React.useEffect(() => {
-    handleAsyncAction(async () => {
-      // eslint-disable-next-line no-unused-vars
-      const listen = onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          dispatch(createActionSetUserId(user.uid))
-          const isAdmin = await checkIsAdmin(user.uid)
-          if (isAdmin) {
-            dispatch(createActionSetUserIsAdmin())
-          }
-          dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
-          dispatch(createActionSetUserEmail(user.email && user.email))
-          dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
-          dispatch(createActionSetIsUserLoggedId())
-        } else {
-          dispatch(createActionRemoveIsUserLoggedId())
+    const listen = onAuthStateChanged(auth, (user) => {
+      handleAsyncAction(async () => {
+        const isAdmin = await checkIsAdmin(user.uid)
+        if (isAdmin) {
+          dispatch(createActionSetUserIsAdmin())
         }
+        const posts = await getPosts()
+        dispatch(createActionSetPosts(posts))
       })
-      const posts = await getPosts()
-      dispatch(createActionSetPosts(posts))
+      if (user) {
+        dispatch(createActionSetUserId(user.uid))
+        dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
+        dispatch(createActionSetUserEmail(user.email && user.email))
+        dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
+        dispatch(createActionSetIsUserLoggedId())
+      } else {
+        dispatch(createActionRemoveIsUserLoggedId())
+      }
     })
+
+    return () => listen()
   }, [dispatch])
 
   return (
