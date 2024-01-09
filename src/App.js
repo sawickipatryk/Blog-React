@@ -59,9 +59,11 @@ function App () {
   React.useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       handleAsyncAction(async () => {
-        const isAdmin = await checkIsAdmin(user.uid)
-        if (isAdmin) {
-          dispatch(createActionSetUserIsAdmin())
+        if (user) {
+          const isAdmin = await checkIsAdmin(user.uid)
+          if (isAdmin) {
+            dispatch(createActionSetUserIsAdmin())
+          }
         }
         const posts = await getPosts()
         dispatch(createActionSetPosts(posts))
