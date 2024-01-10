@@ -37,7 +37,7 @@ export const MainPage = (props) => {
   const slicedArray = sliceArray(data)
 
   const sliceString = (array) => {
-    const slicedArray = array.firstItemOfArray?.tilte
+    const slicedArray = array.firstItemOfArray?.title
 
     const slicedString = slicedArray && slicedArray.split(' ')
 

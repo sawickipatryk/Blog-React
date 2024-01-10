@@ -64,7 +64,7 @@ export const OurPosts = (props) => {
                            maxWidth: '350px'
                          }}
                        >
-                         {post.tilte}
+                         {post.title}
                        </Typography>
                        <Box
                          sx={{
@@ -142,7 +142,7 @@ export const OurPosts = (props) => {
                        variant={'body2'}
                        fontWeight={theme.typography.fontWeightBold}
                      >
-                       {post.tilte}
+                       {post.title}
                      </Typography>
                      <Box
                        sx={{

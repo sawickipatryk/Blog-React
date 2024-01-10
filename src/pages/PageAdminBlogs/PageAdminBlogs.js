@@ -94,7 +94,7 @@ export const PageAdminBlogs = (props) => {
                       fontWeight: theme.typography.fontWeightBold
                     }}
                   >
-                    {item.tilte}
+                    {item.title}
                   </TableCell>
                   <TableCell align={'right'}>
                     <IconButton
