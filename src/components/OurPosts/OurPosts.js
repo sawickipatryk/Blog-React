@@ -11,8 +11,6 @@ export const OurPosts = (props) => {
     ...otherProps
   } = props
 
-  console.log(posts)
-
   return (
     <Box
       sx={{

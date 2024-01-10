@@ -170,7 +170,7 @@ function App () {
                         element={<PageAdminBlogsNew/>}
                       />
                       <Route
-                        path={'blogs/:blogId'}
+                        path={'blogs/edit/:blogId'}
                         element={<PageAdminBlogsEdit/>}
                       />
                     </Route>

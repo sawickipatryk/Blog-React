@@ -3,11 +3,13 @@ import { createStore, combineReducers } from 'redux'
 import loadersReducer from './state/loaders'
 import authReducer from './state/auth'
 import postsReducer from './state/posts'
+import postReducer from './state/post'
 
 const rootReducer = combineReducers({
   loaders: loadersReducer,
   auth: authReducer,
-  posts: postsReducer
+  posts: postsReducer,
+  post: postReducer
 })
 
 export const store = createStore(

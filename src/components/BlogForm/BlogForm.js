@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, TextField, Button, Container } from '@mui/material'
+import { Box, TextField, Button, Container, Typography } from '@mui/material'
 
 import dayjs from 'dayjs'
 
@@ -13,6 +13,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 
 import theme from '../../theme'
 
+import { useLocation } from 'react-router-dom'
+
 const today = dayjs()
 
 export const BlogForm = (props) => {
@@ -23,6 +25,9 @@ export const BlogForm = (props) => {
 
   const methods = useFormContext()
   const { register, control, formState: { errors } } = methods
+
+  const location = useLocation()
+  const { pathname } = location
 
   return (
     <Box
@@ -38,6 +43,33 @@ export const BlogForm = (props) => {
           marginTop: '40px'
         }}
       >
+        {
+          (pathname === '/admin/blogs/new')
+            ? (
+              <Typography
+                variant={'h1'}
+                sx={{
+                  marginBottom: '10px'
+                }}
+                fontWeight={theme.typography.fontWeightMedium}
+              >
+                NEW BLOG
+              </Typography>
+              )
+            : (pathname.includes('/admin/blogs/edit/'))
+                ? (
+                  <Typography
+                    variant={'h1'}
+                    sx={{
+                      marginBottom: '10px'
+                    }}
+                    fontWeight={theme.typography.fontWeightMedium}
+                  >
+                    EDIT BLOG
+                  </Typography>
+                  )
+                : null
+        }
         <TextField
           {...register('title', {
             required: {
@@ -51,6 +83,7 @@ export const BlogForm = (props) => {
           margin={'dense'}
           fullWidth
           InputLabelProps={{
+            shrink: true,
             style: {
               fontSize: '18px',
               color: theme.palette.primary.main
@@ -77,9 +110,11 @@ export const BlogForm = (props) => {
           margin={'dense'}
           fullWidth
           InputLabelProps={{
+            shrink: true,
             style: {
               fontSize: '18px',
-              color: theme.palette.primary.main
+              color: theme.palette.primary.main,
+              shrink: false
             }
           }}
           inputProps={{
@@ -90,47 +125,52 @@ export const BlogForm = (props) => {
           }}
           label={'Author'}
         />
-        <Controller
-          control={control}
-          name={'date'}
-          rules={{
-            required: {
-              value: true,
-              message: 'Date is required'
-            }
-          }}
-          defaultValue={null}
-          render={({ field: { onChange, onBlur, value, ref } }) => (
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-            >
-              <DatePicker
-                onChange={onChange}
-                value={value}
-                onError={(newError) => newError}
-                slotProps={{
-                  textField: {
-                    margin: 'dense',
-                    size: 'small',
-                    helperText: errors.date && errors.date.message
+        {
+          (pathname === '/admin/blogs/new')
+            ? (
+              <Controller
+                control={control}
+                name={'date'}
+                rules={{
+                  required: {
+                    value: true,
+                    message: 'Date is required'
                   }
                 }}
-                sx={{
-                  '& .MuiOutlinedInput-input': {
-                    color: 'rgb(198, 151, 73)'
-                  },
-                  '& .MuiFormHelperText-root': {
-                    color: '#d32f2f;'
-                  }
-                }}
-                defaultValue={today}
-                disablePast
-                views={['year', 'month', 'day']}
+                defaultValue={null}
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                  >
+                    <DatePicker
+                      onChange={onChange}
+                      value={value}
+                      onError={(newError) => newError}
+                      slotProps={{
+                        textField: {
+                          margin: 'dense',
+                          size: 'small',
+                          helperText: errors.date && errors.date.message
+                        }
+                      }}
+                      sx={{
+                        '& .MuiOutlinedInput-input': {
+                          color: 'rgb(198, 151, 73)'
+                        },
+                        '& .MuiFormHelperText-root': {
+                          color: '#d32f2f;'
+                        }
+                      }}
+                      defaultValue={today}
+                      disablePast
+                      views={['year', 'month', 'day']}
+                    />
+                  </LocalizationProvider>
+                )}
               />
-            </LocalizationProvider>
-          )}
-        />
-
+              )
+            : null
+        }
         <TextField
           {...register('image', {
             required: {
@@ -144,6 +184,7 @@ export const BlogForm = (props) => {
           margin={'dense'}
           fullWidth
           InputLabelProps={{
+            shrink: true,
             style: {
               fontSize: '18px',
               color: theme.palette.primary.main
@@ -170,6 +211,7 @@ export const BlogForm = (props) => {
           margin={'dense'}
           fullWidth
           InputLabelProps={{
+            shrink: true,
             style: {
               fontSize: '18px',
               color: theme.palette.primary.main

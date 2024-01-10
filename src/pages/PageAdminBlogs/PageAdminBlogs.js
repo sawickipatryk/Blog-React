@@ -42,16 +42,12 @@ export const PageAdminBlogs = (props) => {
   const reversedArray = data && data.toReversed()
 
   const onButtonDelete = (id) => {
-    console.log(id)
     handleAsyncAction(async () => {
       await deletePost(id)
       const posts = await getPosts()
       dispatch(createActionSetPosts(posts))
     })
   }
-
-  console.log(reversedArray)
-
   return (
     <Box
       sx={{
@@ -129,7 +125,7 @@ export const PageAdminBlogs = (props) => {
                   </TableCell>
                   <TableCell align={'right'}>
                     <IconButton
-                      onClick={() => { navigate(item.id) }}
+                      onClick={() => { navigate(`edit/${item.id}`) }}
                     >
                       <EditIcon/>
                     </IconButton>

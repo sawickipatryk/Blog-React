@@ -36,7 +36,6 @@ export const PageAdminBlogsNew = (props) => {
 
   // eslint-disable-next-line no-unused-vars
   const onClickAdd = (post) => {
-    console.log(post)
     const newPost = {
       title: post.title,
       image: post.image,
