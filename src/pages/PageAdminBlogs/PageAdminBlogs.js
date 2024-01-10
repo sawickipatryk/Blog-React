@@ -11,12 +11,15 @@ import {
   Paper,
   TableBody,
   IconButton,
-  Container
+  Container,
+  Button
 } from '@mui/material'
 import { useSelector } from 'react-redux'
+import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import theme from '../../theme'
+import { useNavigate } from 'react-router-dom'
 
 export const PageAdminBlogs = (props) => {
   const {
@@ -24,6 +27,7 @@ export const PageAdminBlogs = (props) => {
     ...otherProps
   } = props
 
+  const navigate = useNavigate()
   const { data } = useSelector((state) => state.posts)
 
   console.log(data)
@@ -42,6 +46,16 @@ export const PageAdminBlogs = (props) => {
           paddingTop: '40px'
         }}
       >
+        <Button
+          href={'new'}
+          variant={'contained'}
+          startIcon={<AddIcon/>}
+          sx={{
+            marginBottom: '20px'
+          }}
+        >
+          ADD NEW BLOG
+        </Button>
         <TableContainer component={Paper}>
           <Table
             sx={{
@@ -83,10 +97,12 @@ export const PageAdminBlogs = (props) => {
                     {item.tilte}
                   </TableCell>
                   <TableCell align={'right'}>
-                    <IconButton>
+                    <IconButton
+                      onClick={() => { navigate(item.id) }}
+                    >
                       <EditIcon/>
                     </IconButton>
-                    <IconButton>
+                    <IconButton >
                       <DeleteIcon/>
                     </IconButton>
                   </TableCell>
