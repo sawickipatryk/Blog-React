@@ -132,14 +132,14 @@ export const BlogForm = (props) => {
         />
 
         <TextField
-          {...register('img', {
+          {...register('image', {
             required: {
               value: true,
-              message: 'Img is required'
+              message: 'Image URL is required'
             }
           })}
-          error={Boolean(errors.author)}
-          helperText={errors.author && errors.author.message}
+          error={Boolean(errors.image)}
+          helperText={errors.image && errors.image.message}
           size={'small'}
           margin={'dense'}
           fullWidth
@@ -155,7 +155,7 @@ export const BlogForm = (props) => {
               color: theme.palette.primary.main
             }
           }}
-          label={'Img'}
+          label={'Image URL'}
         />
         <TextField
           {...register('text', {

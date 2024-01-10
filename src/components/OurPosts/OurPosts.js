@@ -11,6 +11,8 @@ export const OurPosts = (props) => {
     ...otherProps
   } = props
 
+  console.log(posts)
+
   return (
     <Box
       sx={{
@@ -44,14 +46,15 @@ export const OurPosts = (props) => {
                    <Box
                      sx={{
                        position: 'relative',
-                       backgroundImage: `url(${post.img})`,
+                       backgroundImage: `url(${post.image})`,
                        height: '280px',
                        backgroundPosition: 'center',
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat',
                        display: 'flex',
                        alignItems: 'flex-end',
-                       padding: '10px'
+                       padding: '10px',
+                       minWidth: '280px'
 
                      }}
                    >
@@ -81,7 +84,7 @@ export const OurPosts = (props) => {
                          <Typography
                            variant={'caption'}
                          >
-                           {post.NewDate}
+                           {post.date}
                          </Typography>
                        </Box>
                      </Box>
@@ -119,17 +122,14 @@ export const OurPosts = (props) => {
                      display: 'flex'
                    }}
                  >
-                   <Box
-                     sx={{
-                       width: '150px'
-                     }}
-                   >
+                   <Box >
                      <img
-                       src={post.img}
+                       src={post.image}
                        alt={'something'}
                        style={{
-                         height: '100%',
-                         objectFit: 'cover'
+                         height: '95px',
+                         objectFit: 'cover',
+                         width: '108px'
                        }}
                      />
                    </Box>
@@ -148,7 +148,8 @@ export const OurPosts = (props) => {
                        sx={{
                          display: 'flex',
                          alignItems: 'center',
-                         justifyContent: 'space-between'
+                         justifyContent: 'space-between',
+                         width: '100%'
                        }}
                      >
                        <Typography
@@ -159,7 +160,7 @@ export const OurPosts = (props) => {
                        <Typography
                          variant={'caption'}
                        >
-                         {post.NewDate}
+                         {post.date}
                        </Typography>
                      </Box>
                    </Box>

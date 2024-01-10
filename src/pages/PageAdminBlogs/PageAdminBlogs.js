@@ -12,7 +12,8 @@ import {
   TableBody,
   IconButton,
   Container,
-  Button
+  Button,
+  Typography
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
@@ -30,7 +31,9 @@ export const PageAdminBlogs = (props) => {
   const navigate = useNavigate()
   const { data } = useSelector((state) => state.posts)
 
-  console.log(data)
+  const reversedArray = data && data.toReversed()
+
+  console.log(reversedArray)
 
   return (
     <Box
@@ -76,12 +79,18 @@ export const PageAdminBlogs = (props) => {
                 <TableCell
                   sx={{ color: 'black' }}
                   align={'right'}
+                >Date
+                </TableCell>
+                <TableCell
+                  sx={{ color: 'black' }}
+                  align={'right'}
                 >Action
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data && data.map((item) => (
+              {reversedArray && reversedArray.map((item) => (
+
                 <TableRow
                   key={item.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -95,6 +104,11 @@ export const PageAdminBlogs = (props) => {
                     }}
                   >
                     {item.title}
+                  </TableCell>
+                  <TableCell align={'right'}>
+                    <Typography>
+                      {item.date}
+                    </Typography>
                   </TableCell>
                   <TableCell align={'right'}>
                     <IconButton

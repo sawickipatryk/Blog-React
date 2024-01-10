@@ -23,10 +23,12 @@ export const MainPage = (props) => {
   } = props
 
   const sliceArray = (array) => {
+    const reverserArray = array && array.toReversed()
+
     const firstChunk = 4
-    const firstItemOfArray = array && array[0]
-    const firstArray = array && array.slice(1, firstChunk)
-    const secondArray = array && array.slice(firstChunk, array.length)
+    const firstItemOfArray = reverserArray && reverserArray[0]
+    const firstArray = reverserArray && reverserArray.slice(1, firstChunk)
+    const secondArray = reverserArray && reverserArray.slice(firstChunk, reverserArray.length)
 
     return {
       firstItemOfArray,
@@ -79,7 +81,7 @@ export const MainPage = (props) => {
                   <Box
                     sx={{
                       position: 'relative',
-                      backgroundImage: `url(${slicedArray.firstItemOfArray?.img})`,
+                      backgroundImage: `url(${slicedArray.firstItemOfArray?.image})`,
                       width: '100%',
                       height: '80vh',
                       backgroundPosition: 'center',

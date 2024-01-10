@@ -6,6 +6,9 @@ import { Box } from '@mui/material'
 import { useDispatch } from 'react-redux'
 
 import { createActionSetPosts } from '../../state/posts'
+import { createActionSetInfo } from '../../state/loaders'
+
+import { useNavigate } from 'react-router-dom'
 
 import { createPost } from '../../api/Ourposts/create'
 
@@ -25,24 +28,31 @@ export const PageAdminBlogsNew = (props) => {
   const dispatch = useDispatch()
 
   const {
-    handleSubmit
+    handleSubmit,
+    reset
   } = methods
+
+  const navigate = useNavigate()
 
   // eslint-disable-next-line no-unused-vars
   const onClickAdd = (post) => {
+    console.log(post)
     const newPost = {
       title: post.title,
-      img: post.img,
+      image: post.image,
       author: post.author,
       text: post.text,
-      NewDate: `${post.date?.$D}/${post.date?.$M < 10 ? `0${post.date?.$M + 1}` : `${post.date?.$M + 1}`}/${post.date?.$y}`
+      date: `${post.date?.$D}/${post.date?.$M < 10 ? `0${post.date?.$M + 1}` : `${post.date?.$M + 1}`}/${post.date?.$y}`
     }
 
     handleAsyncAction(async () => {
       await createPost(newPost)
       const posts = await getAll()
+      dispatch(createActionSetInfo('Blog was added!'))
       dispatch(createActionSetPosts(posts))
+      navigate('/')
     })
+    reset()
   }
 
   return (
