@@ -47,7 +47,7 @@ export const PageAdminBlogs = (props) => {
         }}
       >
         <Button
-          href={'new'}
+          onClick={() => { navigate('new') }}
           variant={'contained'}
           startIcon={<AddIcon/>}
           sx={{

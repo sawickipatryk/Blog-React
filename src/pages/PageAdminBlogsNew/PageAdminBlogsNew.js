@@ -3,11 +3,20 @@ import PropTypes from 'prop-types'
 
 import { Box } from '@mui/material'
 
+import { useForm, FormProvider } from 'react-hook-form'
+import BlogForm from '../../components/BlogForm/BlogForm'
+
 export const PageAdminBlogsNew = (props) => {
   const {
     sx,
     ...otherProps
   } = props
+
+  const methods = useForm()
+
+  const {
+    handleSubmit
+  } = methods
 
   return (
     <Box
@@ -16,7 +25,14 @@ export const PageAdminBlogsNew = (props) => {
       }}
       {...otherProps}
     >
-      PageAdminBlogsNew
+      <FormProvider
+        {...methods}
+      >
+        <BlogForm
+          onSubmit= {handleSubmit(console.log, console.log)}
+        />
+      </FormProvider>
+
     </Box>
   )
 }

@@ -19,10 +19,10 @@ const theme = createTheme({
       main: '#C69749'
     },
     secondary: {
-      main: '#fff'
+      main: '#111'
     },
     text: {
-      primary: 'rgba(255, 255, 255, 1)',
+      primary: 'rgba(1, 1, 1, 1)',
       secondary: 'rgba(255, 255, 255, 0.7)'
     },
     background: {
@@ -78,6 +78,9 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          '& .MuiPaper-root': {
+            color: 'black'
+          },
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               borderColor: '#C69749'
