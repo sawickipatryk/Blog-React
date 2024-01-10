@@ -15,12 +15,19 @@ import {
   Button,
   Typography
 } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import theme from '../../theme'
 import { useNavigate } from 'react-router-dom'
+
+import { createActionSetPosts } from '../../state/posts'
+
+import { deletePost } from '../../api/Ourposts/delete'
+import { getAll as getPosts } from '../../api/Ourposts/getAll'
+
+import { handleAsyncAction } from '../../handleAsyncAction'
 
 export const PageAdminBlogs = (props) => {
   const {
@@ -29,9 +36,19 @@ export const PageAdminBlogs = (props) => {
   } = props
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const { data } = useSelector((state) => state.posts)
 
   const reversedArray = data && data.toReversed()
+
+  const onButtonDelete = (id) => {
+    console.log(id)
+    handleAsyncAction(async () => {
+      await deletePost(id)
+      const posts = await getPosts()
+      dispatch(createActionSetPosts(posts))
+    })
+  }
 
   console.log(reversedArray)
 
@@ -106,7 +123,7 @@ export const PageAdminBlogs = (props) => {
                     {item.title}
                   </TableCell>
                   <TableCell align={'right'}>
-                    <Typography>
+                    <Typography >
                       {item.date}
                     </Typography>
                   </TableCell>
@@ -116,7 +133,9 @@ export const PageAdminBlogs = (props) => {
                     >
                       <EditIcon/>
                     </IconButton>
-                    <IconButton >
+                    <IconButton
+                      onClick={() => { onButtonDelete(item.id) }}
+                    >
                       <DeleteIcon/>
                     </IconButton>
                   </TableCell>
