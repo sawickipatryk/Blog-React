@@ -1,38 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { useParams } from 'react-router-dom'
-
 import { Box, Container, Typography } from '@mui/material'
 import Navbar from '../../components/Navbar'
-
-import { handleAsyncAction } from '../../handleAsyncAction'
-
-import { getOne } from '../../api/Ourposts/getOne'
-
-import { useDispatch, useSelector } from 'react-redux'
-
-import { createActionSetPost } from '../../state/post'
 
 import theme from '../../theme'
 
 export const BlogLayout = (props) => {
   const {
     sx,
+    data,
     ...otherProps
   } = props
-
-  const { blogId } = useParams()
-  const dispatch = useDispatch()
-
-  const { data } = useSelector((state) => state.post)
-
-  React.useEffect(() => {
-    handleAsyncAction(async () => {
-      const post = await getOne(blogId)
-      dispatch(createActionSetPost(post))
-    })
-  }, [dispatch, blogId])
 
   return (
     <Box
@@ -115,7 +94,8 @@ export const BlogLayout = (props) => {
 }
 
 BlogLayout.propTypes = {
-  sx: PropTypes.object
+  sx: PropTypes.object,
+  data: PropTypes.object
 }
 
 export default BlogLayout
