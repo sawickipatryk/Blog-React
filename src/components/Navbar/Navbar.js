@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink as RouterNavLink } from 'react-router-dom'
 
 import { auth } from '../../firebase'
 import { signOut } from 'firebase/auth'
@@ -262,10 +262,14 @@ export const Navbar = (props) => {
                                 onClick={handleCloseUserMenu}
                               >
                                 <Button
-                                  href={'/admin'}
                                   variant={'text'}
                                 >
-                                  Panel Admin
+                                  <RouterNavLink
+                                    to={'/admin'}
+                                  >
+                                    Panel Admin
+                                  </RouterNavLink>
+
                                 </Button>
                               </MenuItem>
                               )
@@ -286,7 +290,6 @@ export const Navbar = (props) => {
                     )
                   : (
                     <Button
-                      href={'/login'}
                       onClick={handleCloseNavMenu}
                       sx={{
                         flexGrow: 0,
@@ -296,7 +299,11 @@ export const Navbar = (props) => {
                         }
                       }}
                     >
-                      Login
+                      <RouterNavLink
+                        to={'/login'}
+                      >
+                        Login
+                      </RouterNavLink>
                     </Button>
                     )
               }
@@ -342,7 +349,6 @@ export const Navbar = (props) => {
               >
                 {pages.map((page) => (
                   <Button
-                    href={page.href}
                     key={page.id}
                     onClick={handleCloseNavMenu}
                     sx={{
@@ -353,7 +359,11 @@ export const Navbar = (props) => {
                       }
                     }}
                   >
-                    {page.name}
+                    <RouterNavLink
+                      to={page.href}
+                    >
+                      {page.name}
+                    </RouterNavLink>
                   </Button>
                 ))}
               </Box>
@@ -401,10 +411,13 @@ export const Navbar = (props) => {
                                 onClick={handleCloseUserMenu}
                               >
                                 <Button
-                                  href={'/admin'}
                                   variant={'text'}
                                 >
-                                  Panel Admin
+                                  <RouterNavLink
+                                    to={'/admin'}
+                                  >
+                                    Panel Admin
+                                  </RouterNavLink>
                                 </Button>
                               </MenuItem>
                               )
@@ -425,7 +438,6 @@ export const Navbar = (props) => {
                     )
                   : (
                     <Button
-                      href={'/login'}
                       onClick={handleCloseNavMenu}
                       sx={{
                         p: 3,
@@ -435,7 +447,11 @@ export const Navbar = (props) => {
                         }
                       }}
                     >
-                      Login
+                      <RouterNavLink
+                        to={'/login'}
+                      >
+                        Login
+                      </RouterNavLink>
                     </Button>
                     )
               }
