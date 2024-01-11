@@ -83,7 +83,7 @@ export const MainPage = (props) => {
               content={
                 <>
                   <Box
-                    onClick={() => { navigate(`${slicedArray.firstItemOfArray?.id}`) }}
+                    onClick={() => { navigate(`/blog/${slicedArray.firstItemOfArray?.id}`) }}
                     sx={{
                       position: 'relative',
                       backgroundImage: `url(${slicedArray.firstItemOfArray?.image})`,

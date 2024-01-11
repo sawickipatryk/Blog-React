@@ -179,13 +179,14 @@ function App () {
                   : null
               }
               <Route
+                path={'/blog/:blogId'}
+                element={<BlogPage/>}
+              />
+              <Route
                 path={'*'}
                 element={<MainPage/>}
               />
-              <Route
-                path={':blogId'}
-                element={<BlogPage/>}
-              />
+
             </Routes>
             )
           : null
@@ -205,13 +206,14 @@ function App () {
                 element={<SignUp/>}
               />
               <Route
+                path={'/blog/:blogId'}
+                element={<BlogPage/>}
+              />
+              <Route
                 path={'*'}
                 element={<MainPage />}
               />
-              <Route
-                path={':blogId'}
-                element={<BlogPage/>}
-              />
+
             </Routes>
             )
           : null

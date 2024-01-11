@@ -46,7 +46,7 @@ export const OurPosts = (props) => {
                    item
                  >
                    <Box
-                     onClick={() => { navigate(`${post?.id}`) }}
+                     onClick={() => { navigate(`/blog/${post?.id}`) }}
                      sx={{
                        position: 'relative',
                        backgroundImage: `url(${post.image})`,
@@ -120,7 +120,7 @@ export const OurPosts = (props) => {
                  md={4}
                >
                  <Box
-                   onClick={() => { navigate(`${post?.id}`) }}
+                   onClick={() => { navigate(`/blog/${post?.id}`) }}
                    color={'black'}
                    sx={{
                      display: 'flex',
