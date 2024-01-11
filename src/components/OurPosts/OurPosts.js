@@ -22,8 +22,8 @@ export const OurPosts = (props) => {
     <Box
       sx={{
         ...sx,
-        height: '100vh',
-        marginTop: '-90px'
+        marginTop: '-90px',
+        paddingBottom: '30px'
       }}
       {...otherProps}
     >
@@ -60,7 +60,7 @@ export const OurPosts = (props) => {
                        display: 'flex',
                        alignItems: 'flex-end',
                        padding: '10px',
-                       minWidth: '280px',
+                       minWidth: '370px',
                        cursor: 'pointer'
                      }}
                    >
