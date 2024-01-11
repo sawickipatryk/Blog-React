@@ -1,3 +1,20 @@
+# React Pizza Page
+
+## General info
+This project is Blog page.
+	
+## Technologies
+Project is created with:
+* React
+* Material UI
+* Firebase Auth
+* Admin Panel
+* Firebase Hosting
+* Firebase REST API
+* React Hook Form
+* Redux
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
