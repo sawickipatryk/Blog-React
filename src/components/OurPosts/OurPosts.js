@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Box, Grid, Typography, Container } from '@mui/material'
+import { Box, Grid, Typography, Container, Pagination } from '@mui/material'
 import theme from '../../theme'
 
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +10,9 @@ export const OurPosts = (props) => {
   const {
     sx,
     posts,
+    visibleBlogs,
+    numOfTotalPages,
+    onChangePagination,
     ...otherProps
   } = props
 
@@ -110,7 +113,7 @@ export const OurPosts = (props) => {
           container
         >
           {
-           posts && posts.secondArray && posts.secondArray.map((post) => {
+           visibleBlogs && visibleBlogs.map((post) => {
              return (
                <Grid
                  key={post.id}
@@ -175,6 +178,19 @@ export const OurPosts = (props) => {
            })
         }
         </Grid>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '30px'
+          }}
+        >
+          <Pagination
+            count={numOfTotalPages}
+            onChange={onChangePagination}
+          />
+        </Box>
       </Container>
     </Box>
   )
@@ -183,7 +199,10 @@ export const OurPosts = (props) => {
 OurPosts.propTypes = {
   sx: PropTypes.object,
   slicedArray: PropTypes.object,
-  posts: PropTypes.object
+  posts: PropTypes.object,
+  visibleBlogs: PropTypes.array,
+  numOfTotalPages: PropTypes.number,
+  onChangePagination: PropTypes.func
 
 }
 

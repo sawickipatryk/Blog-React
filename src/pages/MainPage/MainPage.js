@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -17,6 +18,11 @@ export const MainPage = (props) => {
   const {
     data
   } = useSelector((state) => state.posts)
+
+  // eslint-disable-next-line no-unused-vars
+  const [paginationPerPage, setPaginationPerPage] = React.useState(6)
+  // eslint-disable-next-line no-unused-vars
+  const [currentPage, setCurrentPage] = React.useState(1)
 
   const {
     sx,
@@ -68,6 +74,17 @@ export const MainPage = (props) => {
   }
 
   const readyArraysWithSlicedString = sliceString(slicedArray)
+
+  const numOfTotalPages = Math.ceil(slicedArray.secondArray && slicedArray.secondArray.length / paginationPerPage)
+
+  const indexOfLastTodo = currentPage * paginationPerPage
+  const indexOfFirstTodo = indexOfLastTodo - paginationPerPage
+
+  const visibleBlogs = slicedArray && slicedArray.secondArray && slicedArray.secondArray.splice(indexOfFirstTodo, indexOfLastTodo)
+
+  const onChangePagination = (e, p) => {
+    setCurrentPage(p)
+  }
 
   return (
     <Box
@@ -168,6 +185,9 @@ export const MainPage = (props) => {
                   </Box>
                   <OurPosts
                     posts={slicedArray}
+                    visibleBlogs={visibleBlogs}
+                    numOfTotalPages={numOfTotalPages}
+                    onChangePagination={onChangePagination}
                   />
                 </>
                 }

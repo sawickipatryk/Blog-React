@@ -31,8 +31,6 @@ export const PageAdminBlogsEdit = (props) => {
 
   const { data } = useSelector((state) => state.post)
 
-  console.log(data)
-
   const methods = useForm()
   const {
     handleSubmit,
