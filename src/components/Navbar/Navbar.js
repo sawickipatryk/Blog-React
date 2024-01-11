@@ -223,15 +223,11 @@ export const Navbar = (props) => {
                   ? (
                     <Box sx={{ flexGrow: 0 }}>
                       <Tooltip title={'Open settings'}>
-                        <IconButton
+                        <Button
                           onClick={handleOpenUserMenu}
-                          sx={{ p: 0 }}
                         >
-                          <Avatar
-                            alt={'Remy Sharp'}
-                            src={'/static/images/avatar/2.jpg'}
-                          />
-                        </IconButton>
+                          Profile
+                        </Button>
                       </Tooltip>
                       <Menu
                         sx={{
@@ -372,15 +368,11 @@ export const Navbar = (props) => {
                   ? (
                     <Box sx={{ flexGrow: 0 }}>
                       <Tooltip title={'Open settings'}>
-                        <IconButton
+                        <Button
                           onClick={handleOpenUserMenu}
-                          sx={{ p: 0 }}
                         >
-                          <Avatar
-                            alt={'Remy Sharp'}
-                            src={'/static/images/avatar/2.jpg'}
-                          />
-                        </IconButton>
+                          Profile
+                        </Button>
                       </Tooltip>
                       <Menu
                         sx={{
