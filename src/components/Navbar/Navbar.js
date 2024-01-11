@@ -213,9 +213,12 @@ export const Navbar = (props) => {
               </Box> {
                 isUserLoggedIn
                   ? (
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box>
                       <Tooltip title={'Open settings'}>
                         <Button
+                          sx={{
+                            padding: '12px 16px'
+                          }}
                           onClick={handleOpenUserMenu}
                         >
                           Profile
@@ -367,9 +370,13 @@ export const Navbar = (props) => {
               {
                 isUserLoggedIn
                   ? (
-                    <Box sx={{ flexGrow: 0 }}>
+                    <Box>
                       <Tooltip title={'Open settings'}>
                         <Button
+                          sx={{
+                            p: 3
+                          }}
+
                           onClick={handleOpenUserMenu}
                         >
                           Profile
