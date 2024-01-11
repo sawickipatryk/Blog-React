@@ -40,11 +40,15 @@ export const BlogLayout = (props) => {
       </Box>
       <Container
         sx={{
-          padding: '20px 0px',
+          padding: '20px 10px',
           position: 'relative',
           marginTop: '-60px',
           backgroundColor: 'white',
-          boxShadow: '1px 5px 10px rgba(1,1,1,1)'
+          [theme.breakpoints.up('md')]: {
+            boxShadow: '1px 5px 10px rgba(1,1,1,1)',
+            padding: '20px 10px'
+          }
+
         }}
         maxWidth={'lg'}
       >
