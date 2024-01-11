@@ -1,3 +1,22 @@
+# React Blog Page
+
+## General info
+This project is Blog page.
+	
+## Technologies
+Project is created with:
+* React
+* Material UI
+* Firebase Auth
+* Admin Panel
+* Firebase Hosting
+* Firebase REST API
+* React Hook Form
+* React Router
+* Redux
+* ESLint
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
