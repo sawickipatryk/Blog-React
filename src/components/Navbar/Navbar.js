@@ -256,16 +256,19 @@ export const Navbar = (props) => {
                               <MenuItem
                                 onClick={handleCloseUserMenu}
                               >
-                                <Button
-                                  variant={'text'}
+                                <RouterNavLink
+                                  style={{
+                                    textDecoration: 'none'
+                                  }}
+                                  to={'/admin'}
                                 >
-                                  <RouterNavLink
-                                    to={'/admin'}
+                                  <Button
+                                    variant={'text'}
                                   >
                                     Panel Admin
-                                  </RouterNavLink>
+                                  </Button>
+                                </RouterNavLink>
 
-                                </Button>
                               </MenuItem>
                               )
                             : null
@@ -284,22 +287,25 @@ export const Navbar = (props) => {
                     </Box>
                     )
                   : (
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        flexGrow: 0,
-                        display: 'block',
-                        '&:hover': {
-                          color: '#fff'
-                        }
+                    <RouterNavLink
+                      style={{
+                        textDecoration: 'none'
                       }}
+                      to={'/login'}
                     >
-                      <RouterNavLink
-                        to={'/login'}
+                      <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{
+                          flexGrow: 0,
+                          display: 'block',
+                          '&:hover': {
+                            color: '#fff'
+                          }
+                        }}
                       >
                         Login
-                      </RouterNavLink>
-                    </Button>
+                      </Button>
+                    </RouterNavLink>
                     )
               }
             </Box>
@@ -343,23 +349,26 @@ export const Navbar = (props) => {
                 }}
               >
                 {pages.map((page) => (
-                  <Button
-                    key={page.id}
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      p: 3,
-                      display: 'block',
-                      '&:hover': {
-                        color: '#fff'
-                      }
+                  <RouterNavLink
+                    style={{
+                      textDecoration: 'none'
                     }}
+                    key={page.id}
+                    to={page.href}
                   >
-                    <RouterNavLink
-                      to={page.href}
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        p: 3,
+                        display: 'block',
+                        '&:hover': {
+                          color: '#fff'
+                        }
+                      }}
                     >
                       {page.name}
-                    </RouterNavLink>
-                  </Button>
+                    </Button>
+                  </RouterNavLink>
                 ))}
               </Box>
               {
@@ -401,15 +410,18 @@ export const Navbar = (props) => {
                               <MenuItem
                                 onClick={handleCloseUserMenu}
                               >
-                                <Button
-                                  variant={'text'}
+                                <RouterNavLink
+                                  style={{
+                                    textDecoration: 'none'
+                                  }}
+                                  to={'/admin'}
                                 >
-                                  <RouterNavLink
-                                    to={'/admin'}
+                                  <Button
+                                    variant={'text'}
                                   >
                                     Panel Admin
-                                  </RouterNavLink>
-                                </Button>
+                                  </Button>
+                                </RouterNavLink>
                               </MenuItem>
                               )
                             : null
@@ -428,22 +440,25 @@ export const Navbar = (props) => {
                     </Box>
                     )
                   : (
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        p: 3,
-                        display: 'block',
-                        '&:hover': {
-                          color: '#fff'
-                        }
+                    <RouterNavLink
+                      style={{
+                        textDecoration: 'none'
                       }}
+                      to={'/login'}
                     >
-                      <RouterNavLink
-                        to={'/login'}
+                      <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{
+                          p: 3,
+                          display: 'block',
+                          '&:hover': {
+                            color: '#fff'
+                          }
+                        }}
                       >
                         Login
-                      </RouterNavLink>
-                    </Button>
+                      </Button>
+                    </RouterNavLink>
                     )
               }
             </Box>
