@@ -12,7 +12,9 @@ Project is created with:
 * Firebase Hosting
 * Firebase REST API
 * React Hook Form
+* React Router
 * Redux
+* ESLint
 
 
 # Getting Started with Create React App
