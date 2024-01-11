@@ -131,7 +131,7 @@ export const MainPage = (props) => {
                     >
                       <Box
                         sx={{
-                          maxWidth: '500px'
+                          maxWidth: '700px'
                         }}
                       >
                         {
