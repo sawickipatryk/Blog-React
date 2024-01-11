@@ -28,8 +28,7 @@ import {
   Container,
   Button,
   MenuItem,
-  Tooltip,
-  Avatar
+  Tooltip
 } from '@mui/material'
 
 import theme from '../../theme'
