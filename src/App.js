@@ -33,8 +33,9 @@ import {
 
 import handleAsyncAction from './handleAsyncAction'
 import Message from './components/Message'
-import { Typography, Box } from '@mui/material'
+import { Box } from '@mui/material'
 import { createActionRemoveInfo, createActionRemoveError } from './state/loaders'
+import Loader from './components/Loader/Loader'
 
 function App () {
   const dispatch = useDispatch()
@@ -95,20 +96,18 @@ function App () {
               backgroundColor: 'white',
               position: 'fixed',
               zIndex: 999999999,
+              maxHeight: '100vh',
               height: '100vh',
               width: '100%',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              '&::-webkit-scrollbar': {
+                width: '0.4em'
+              }
             }}
           >
-            <Typography
-              variant={'h1'}
-              sx={{
-                color: 'black'
-              }}
-            >LOADING.........
-            </Typography>
+            <Loader/>
           </Box>
 
           )
