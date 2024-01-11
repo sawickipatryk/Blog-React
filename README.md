@@ -1,4 +1,4 @@
-# React Pizza Page
+# React Blog Page
 
 ## General info
 This project is Blog page.
