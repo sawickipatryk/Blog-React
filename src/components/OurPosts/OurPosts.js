@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Box, Grid, Typography, Container, Pagination } from '@mui/material'
 import theme from '../../theme'
+import SearchInput from '../SearchInput'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -100,14 +101,29 @@ export const OurPosts = (props) => {
              })
         }
         </Grid>
-        <Typography
-          fontWeight={theme.typography.fontWeightBold}
+        <Box
           sx={{
-            marginBottom: '15px'
+            marginBottom: '20px',
+            [theme.breakpoints.up('md')]: {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }
           }}
-          variant={'h5'}
-        >MORE FROM US
-        </Typography>
+        >
+          <Typography
+            fontWeight={theme.typography.fontWeightBold}
+            variant={'h5'}
+            sx={{
+              marginBottom: '20px',
+              [theme.breakpoints.up('md')]: {
+                marginBottom: '0px'
+              }
+            }}
+          >MORE FROM US
+          </Typography>
+          <SearchInput/>
+        </Box>
         <Grid
           spacing={{ xs: 2, md: 2 }}
           container

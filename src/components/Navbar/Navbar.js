@@ -37,8 +37,6 @@ import theme from '../../theme'
 import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import SearchInput from '../SearchInput'
-
 const pages = [
   {
     id: 1,
@@ -442,7 +440,6 @@ export const Navbar = (props) => {
                     )
               }
             </Box>
-            <SearchInput/>
           </Toolbar>
         </Container>
       </AppBar>

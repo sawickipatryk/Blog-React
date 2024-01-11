@@ -9,12 +9,14 @@ import {
 
 import SearchIcon from '@mui/icons-material/Search'
 
+import tehme from '../../theme'
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.5),
+  backgroundColor: alpha(theme.palette.common.black, 0.5),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25)
+    backgroundColor: alpha(theme.palette.common.black, 0.25)
   },
   marginLeft: 0,
   width: '100%',
@@ -40,7 +42,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width')
+    transition: theme.transitions.create('width'),
+    width: '100%'
   }
 }))
 
@@ -54,7 +57,10 @@ export const SearchInput = (props) => {
     <Box
       sx={{
         ...sx,
-        width: '100%'
+        width: '100%',
+        [tehme.breakpoints.up('md')]: {
+          width: '300px'
+        }
       }}
       {...otherProps}
     >
