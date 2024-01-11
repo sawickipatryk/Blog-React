@@ -103,19 +103,13 @@ export const Navbar = (props) => {
         {...otherProps}
         position={'fixed'}
         sx={{
-          padding: '12px 0px',
-          backgroundColor: theme.palette.background.navBarBackgroundColor,
-          [theme.breakpoints.up('md')]: {
-            padding: '0px 0px 12px 0px'
-          }
-
+          backgroundColor: theme.palette.background.navBarBackgroundColor
         }}
       >
         <Container maxWidth={'lg'}>
           <Toolbar
             sx={{
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center'
             }}
             disableGutters
@@ -124,8 +118,7 @@ export const Navbar = (props) => {
               sx={{
                 display: { xs: 'flex', md: 'none' },
                 width: '100%',
-                alignItems: 'center',
-                paddingBottom: '10px'
+                alignItems: 'center'
               }}
             >
               <Box
