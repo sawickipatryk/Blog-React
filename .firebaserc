@@ -12,5 +12,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "projects": {
+    "default": "blog-website-85b0a"
   }
 }
