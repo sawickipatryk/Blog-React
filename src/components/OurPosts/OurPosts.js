@@ -4,12 +4,16 @@ import PropTypes from 'prop-types'
 import { Box, Grid, Typography, Container } from '@mui/material'
 import theme from '../../theme'
 
+import { useNavigate } from 'react-router-dom'
+
 export const OurPosts = (props) => {
   const {
     sx,
     posts,
     ...otherProps
   } = props
+
+  const navigate = useNavigate()
 
   return (
     <Box
@@ -42,6 +46,7 @@ export const OurPosts = (props) => {
                    item
                  >
                    <Box
+                     onClick={() => { navigate(`${post?.id}`) }}
                      sx={{
                        position: 'relative',
                        backgroundImage: `url(${post.image})`,
@@ -52,8 +57,8 @@ export const OurPosts = (props) => {
                        display: 'flex',
                        alignItems: 'flex-end',
                        padding: '10px',
-                       minWidth: '280px'
-
+                       minWidth: '280px',
+                       cursor: 'pointer'
                      }}
                    >
                      <Box
@@ -115,9 +120,11 @@ export const OurPosts = (props) => {
                  md={4}
                >
                  <Box
+                   onClick={() => { navigate(`${post?.id}`) }}
                    color={'black'}
                    sx={{
-                     display: 'flex'
+                     display: 'flex',
+                     cursor: 'pointer'
                    }}
                  >
                    <Box >

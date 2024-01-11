@@ -7,6 +7,8 @@ import MainLayout from '../../layouts/MainLayout'
 import Hero from '../../components/Hero'
 import OurPosts from '../../components/OurPosts'
 
+import { useNavigate } from 'react-router-dom'
+
 import theme from '../../theme'
 
 import { useSelector } from 'react-redux'
@@ -21,6 +23,8 @@ export const MainPage = (props) => {
     children,
     ...otherProps
   } = props
+
+  const navigate = useNavigate()
 
   const sliceArray = (array) => {
     const reverserArray = array && array.toReversed()
@@ -79,6 +83,7 @@ export const MainPage = (props) => {
               content={
                 <>
                   <Box
+                    onClick={() => { navigate(`${slicedArray.firstItemOfArray?.id}`) }}
                     sx={{
                       position: 'relative',
                       backgroundImage: `url(${slicedArray.firstItemOfArray?.image})`,
@@ -89,7 +94,8 @@ export const MainPage = (props) => {
                       backgroundRepeat: 'no-repeat',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      cursor: 'pointer'
                     }}
                   >
                     <Container

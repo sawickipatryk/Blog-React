@@ -1,6 +1,7 @@
 import React from 'react'
 
 import MainPage from './pages/MainPage/MainPage'
+import BlogPage from './pages/BlogPage/BlogPage'
 import SignIn from './pages/SignIn/SignIn'
 import SignUp from './pages/SignUp/SignUp'
 import PageAdminMain from './pages/PageAdminMain/PageAdminMain'
@@ -179,8 +180,11 @@ function App () {
               }
               <Route
                 path={'*'}
-                element={<MainPage/>
-          }
+                element={<MainPage/>}
+              />
+              <Route
+                path={':blogId'}
+                element={<BlogPage/>}
               />
             </Routes>
             )
@@ -203,6 +207,10 @@ function App () {
               <Route
                 path={'*'}
                 element={<MainPage />}
+              />
+              <Route
+                path={':blogId'}
+                element={<BlogPage/>}
               />
             </Routes>
             )
