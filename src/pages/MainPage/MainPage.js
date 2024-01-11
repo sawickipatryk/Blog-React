@@ -19,10 +19,19 @@ export const MainPage = (props) => {
     data
   } = useSelector((state) => state.posts)
 
-  // eslint-disable-next-line no-unused-vars
   const [paginationPerPage, setPaginationPerPage] = React.useState(6)
-  // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = React.useState(1)
+
+  const [searchQuery, setSearchQuery] = React.useState('')
+
+  const filterData = (query, data) => {
+    const queryToLowerCase = query.toLowerCase()
+    if (!queryToLowerCase) {
+      return data
+    } else {
+      return data && data.filter((d) => d.title.toLowerCase().includes(queryToLowerCase))
+    }
+  }
 
   const {
     sx,
@@ -85,6 +94,8 @@ export const MainPage = (props) => {
   const onChangePagination = (e, p) => {
     setCurrentPage(p)
   }
+
+  const dataFiltered = filterData(searchQuery, visibleBlogs)
 
   return (
     <Box
@@ -185,9 +196,10 @@ export const MainPage = (props) => {
                   </Box>
                   <OurPosts
                     posts={slicedArray}
-                    visibleBlogs={visibleBlogs}
+                    visibleBlogs={dataFiltered}
                     numOfTotalPages={numOfTotalPages}
                     onChangePagination={onChangePagination}
+                    setSearchQuery={setSearchQuery}
                   />
                 </>
                 }

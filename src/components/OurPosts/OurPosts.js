@@ -14,6 +14,8 @@ export const OurPosts = (props) => {
     visibleBlogs,
     numOfTotalPages,
     onChangePagination,
+    setSearchQuery,
+    searchQuery,
     ...otherProps
   } = props
 
@@ -122,7 +124,9 @@ export const OurPosts = (props) => {
             }}
           >MORE FROM US
           </Typography>
-          <SearchInput/>
+          <SearchInput
+            setSearchQuery={setSearchQuery}
+          />
         </Box>
         <Grid
           spacing={{ xs: 2, md: 2 }}
@@ -218,7 +222,9 @@ OurPosts.propTypes = {
   posts: PropTypes.object,
   visibleBlogs: PropTypes.array,
   numOfTotalPages: PropTypes.number,
-  onChangePagination: PropTypes.func
+  onChangePagination: PropTypes.func,
+  setSearchQuery: PropTypes.func,
+  searchQuery: PropTypes.string
 
 }
 

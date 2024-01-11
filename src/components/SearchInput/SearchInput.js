@@ -50,6 +50,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const SearchInput = (props) => {
   const {
     sx,
+    setSearchQuery,
+    searchQuery,
     ...otherProps
   } = props
 
@@ -64,7 +66,12 @@ export const SearchInput = (props) => {
       }}
       {...otherProps}
     >
-      <Search>
+      <Search
+        value={searchQuery}
+        onInput={(e) => {
+          setSearchQuery(e.target.value)
+        }}
+      >
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>
@@ -78,7 +85,9 @@ export const SearchInput = (props) => {
 }
 
 SearchInput.propTypes = {
-  sx: PropTypes.object
+  sx: PropTypes.object,
+  setSearchQuery: PropTypes.func,
+  searchQuery: PropTypes.string
 }
 
 export default SearchInput
