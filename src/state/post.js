@@ -6,7 +6,7 @@ export const createActionSetPost = (data) => ({
 })
 
 const initialState = {
-  data: []
+  data: {}
 }
 
 export const reducer = (state = initialState, action) => {
