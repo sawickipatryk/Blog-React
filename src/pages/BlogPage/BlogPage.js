@@ -20,17 +20,21 @@ export const BlogPage = (props) => {
     ...otherProps
   } = props
 
-  const { blogId } = useParams()
   const dispatch = useDispatch()
 
   const { data } = useSelector((state) => state.post)
+  const { blogId } = useParams()
 
-  React.useEffect(() => {
+  const fetchData = React.useCallback(async () => {
     handleAsyncAction(async () => {
       const post = await getOne(blogId)
       dispatch(createActionSetPost(post))
     })
-  }, [dispatch, blogId])
+  }, [blogId, dispatch])
+
+  React.useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   return (
     <Box

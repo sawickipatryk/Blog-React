@@ -11,7 +11,7 @@ export const createActionCreatPost = (data) => ({
 })
 
 const initialState = {
-  data: null
+  data: []
 }
 
 export const reducer = (state = initialState, action) => {

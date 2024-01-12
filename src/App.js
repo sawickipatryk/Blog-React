@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
 import MainPage from './pages/MainPage/MainPage'
@@ -9,25 +10,15 @@ import PageAdminBlogs from './pages/PageAdminBlogs/PageAdminBlogs'
 import PageAdminBlogsNew from './pages/PageAdminBlogsNew/PageAdminBlogsNew'
 import PageAdminBlogsEdit from './pages/PageAdminBlogsEdit/PageAdminBlogsEdit'
 
-import { auth } from './firebase'
-
 import { Routes, Route } from 'react-router-dom'
-import { onAuthStateChanged } from 'firebase/auth'
+
+import { AuthDetails } from './components/AuthDetails'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { createActionSetPosts } from './state/posts'
-
-import { getAll as getPosts } from './api/Ourposts/getAll'
 import { isAdmin as checkIsAdmin } from './api/admins/isAdmin'
 
 import {
-  createActionSetIsUserLoggedId,
-  createActionSetUserId,
-  createActionSetUserDisplayName,
-  createActionSetUserEmail,
-  createActionSetUserAvatar,
-  createActionRemoveIsUserLoggedId,
   createActionSetUserIsAdmin
 } from './state/auth'
 
@@ -58,31 +49,16 @@ function App () {
     window.scrollTo(0, 0)
   }, [dispatch])
 
-  React.useEffect(() => {
-    const listen = onAuthStateChanged(auth, (user) => {
-      handleAsyncAction(async () => {
-        if (user) {
-          const isAdmin = await checkIsAdmin(user.uid)
-          if (isAdmin) {
-            dispatch(createActionSetUserIsAdmin())
-          }
-        }
-        const posts = await getPosts()
-        dispatch(createActionSetPosts(posts))
-      })
-      if (user) {
-        dispatch(createActionSetUserId(user.uid))
-        dispatch(createActionSetUserDisplayName(user.displayName && user.displayName))
-        dispatch(createActionSetUserEmail(user.email && user.email))
-        dispatch(createActionSetUserAvatar(user.photoURL && user.photoURL))
-        dispatch(createActionSetIsUserLoggedId())
-      } else {
-        dispatch(createActionRemoveIsUserLoggedId())
-      }
-    })
-
-    return () => listen()
-  }, [dispatch])
+  // const checkIsAdminTrue = React.useCallback((user) => {
+  //   handleAsyncAction(async () => {
+  //     if (user) {
+  //       const isAdmin = await checkIsAdmin(user.uid)
+  //       if (isAdmin) {
+  //         dispatch(createActionSetUserIsAdmin())
+  //       }
+  //     }
+  //   })
+  // }, [dispatch])
 
   return (
     <>
@@ -185,16 +161,9 @@ function App () {
                 path={'*'}
                 element={<MainPage/>}
               />
-
             </Routes>
             )
-          : null
-      }
-      {
-        (
-          !isUserLoggedIn
-        )
-          ? (
+          : (
             <Routes>
               <Route
                 path={'/login'}
@@ -215,9 +184,8 @@ function App () {
 
             </Routes>
             )
-          : null
       }
-
+      <AuthDetails/>
     </>
   )
 }
