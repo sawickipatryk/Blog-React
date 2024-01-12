@@ -16,12 +16,6 @@ import { AuthDetails } from './components/AuthDetails'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { isAdmin as checkIsAdmin } from './api/admins/isAdmin'
-
-import {
-  createActionSetUserIsAdmin
-} from './state/auth'
-
 import handleAsyncAction from './handleAsyncAction'
 import Message from './components/Message'
 import { Box } from '@mui/material'
@@ -40,7 +34,8 @@ function App () {
   } = useSelector((state) => state.loaders)
   const {
     isUserLoggedIn,
-    isAdmin
+    isAdmin,
+    userId
   } = useSelector((state) => state.auth)
 
   const dismissMessage = React.useCallback(() => {
@@ -48,17 +43,6 @@ function App () {
     dispatch(createActionRemoveError())
     window.scrollTo(0, 0)
   }, [dispatch])
-
-  // const checkIsAdminTrue = React.useCallback((user) => {
-  //   handleAsyncAction(async () => {
-  //     if (user) {
-  //       const isAdmin = await checkIsAdmin(user.uid)
-  //       if (isAdmin) {
-  //         dispatch(createActionSetUserIsAdmin())
-  //       }
-  //     }
-  //   })
-  // }, [dispatch])
 
   return (
     <>
