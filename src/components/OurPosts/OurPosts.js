@@ -11,11 +11,10 @@ export const OurPosts = (props) => {
   const {
     sx,
     posts,
-    visibleBlogs,
+    dataFiltered,
     numOfTotalPages,
     onChangePagination,
     setSearchQuery,
-    searchQuery,
     ...otherProps
   } = props
 
@@ -133,7 +132,7 @@ export const OurPosts = (props) => {
           container
         >
           {
-           visibleBlogs && visibleBlogs.map((post) => {
+           dataFiltered && dataFiltered.map((post) => {
              return (
                <Grid
                  key={post.id}
@@ -220,12 +219,10 @@ OurPosts.propTypes = {
   sx: PropTypes.object,
   slicedArray: PropTypes.object,
   posts: PropTypes.object,
-  visibleBlogs: PropTypes.array,
+  dataFiltered: PropTypes.array,
   numOfTotalPages: PropTypes.number,
   onChangePagination: PropTypes.func,
-  setSearchQuery: PropTypes.func,
-  searchQuery: PropTypes.string
-
+  setSearchQuery: PropTypes.func
 }
 
 export default OurPosts

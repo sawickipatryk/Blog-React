@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -25,19 +24,11 @@ export const MainPage = (props) => {
     data
   } = useSelector((state) => state.posts)
 
+  // eslint-disable-next-line no-unused-vars
   const [paginationPerPage, setPaginationPerPage] = React.useState(6)
   const [currentPage, setCurrentPage] = React.useState(1)
 
   const [searchQuery, setSearchQuery] = React.useState('')
-
-  const filterData = (query, data) => {
-    const queryToLowerCase = query.toLowerCase()
-    if (!queryToLowerCase) {
-      return data
-    } else {
-      return data && data.filter((d) => d.title.toLowerCase().includes(queryToLowerCase))
-    }
-  }
 
   const {
     sx,
@@ -47,6 +38,13 @@ export const MainPage = (props) => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const fetchData = React.useCallback(async () => {
+    handleAsyncAction(async () => {
+      const posts = await getPosts()
+      dispatch(createActionSetPosts(posts))
+    })
+  }, [dispatch])
 
   const sliceArray = (array) => {
     const reverserArray = array && array.toReversed()
@@ -91,31 +89,31 @@ export const MainPage = (props) => {
 
   const readyArraysWithSlicedString = sliceString(slicedArray)
 
-  const numOfTotalPages = Math.ceil(slicedArray.secondArray && slicedArray.secondArray.length / paginationPerPage)
-
-  const indexOfLastTodo = currentPage * paginationPerPage
-  const indexOfFirstTodo = indexOfLastTodo - paginationPerPage
-
-  const visibleBlogs = slicedArray && slicedArray.secondArray && slicedArray.secondArray.splice(indexOfFirstTodo, indexOfLastTodo)
+  const indexOfLastBlog = currentPage * paginationPerPage
+  const indexOfFirstBlog = indexOfLastBlog - paginationPerPage
 
   const onChangePagination = (e, p) => {
     setCurrentPage(p)
   }
 
-  const dataFiltered = filterData(searchQuery, visibleBlogs)
+  const filterData = (query, data) => {
+    const queryToLowerCase = query.toLowerCase()
+    if (!queryToLowerCase) {
+      return data
+    } else {
+      return data && data.filter((d) => d.title.toLowerCase().includes(queryToLowerCase))
+    }
+  }
 
-  const fetchData = React.useCallback(async () => {
-    handleAsyncAction(async () => {
-      const posts = await getPosts()
-      dispatch(createActionSetPosts(posts))
-    })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const dataFiltered = filterData(searchQuery, slicedArray.secondArray)
+
+  const numOfTotalPages = Math.ceil(dataFiltered.length / paginationPerPage)
+
+  const visibleBlogs = dataFiltered.splice(indexOfFirstBlog, indexOfLastBlog)
 
   React.useEffect(() => {
     fetchData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [fetchData])
 
   return (
     <Box
@@ -216,7 +214,7 @@ export const MainPage = (props) => {
                   </Box>
                   <OurPosts
                     posts={slicedArray}
-                    visibleBlogs={dataFiltered}
+                    dataFiltered={visibleBlogs}
                     numOfTotalPages={numOfTotalPages}
                     onChangePagination={onChangePagination}
                     setSearchQuery={setSearchQuery}
