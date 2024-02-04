@@ -33,6 +33,8 @@ export const SignUp = (props) => {
   const methods = useForm()
   const { handleSubmit } = methods
 
+  const onClickLogin = React.useCallback(() => navigate('/login'), [navigate])
+
   const signUp = (email, password) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -57,6 +59,7 @@ export const SignUp = (props) => {
           >
             <SignUpForm
               onSubmit= {handleSubmit((data) => signUp(data.email, data.password))}
+              onClickLogin={onClickLogin}
             />
           </FormProvider>
     }

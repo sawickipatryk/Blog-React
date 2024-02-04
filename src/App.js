@@ -46,6 +46,77 @@ function App () {
 
   return (
     <>
+
+      {
+        (
+          !isUserLoggedIn
+        )
+          ? (
+            <Routes>
+              <Route
+                path={'/login'}
+                element={<SignIn/>}
+              />
+              <Route
+                path={'/register'}
+                element={<SignUp/>}
+              />
+              <Route
+                path={'/blog/:blogId'}
+                element={<BlogPage/>}
+              />
+              <Route
+                path={'*'}
+                element={<MainPage />}
+              />
+
+            </Routes>
+            )
+          : null
+      }
+      {
+        (
+          isUserLoggedIn
+        )
+          ? (
+            <Routes>
+              {
+                isAdmin
+                  ? (
+                    <Route
+                      path={'/admin'}
+                      element={<PageAdminMain/>}
+                    >
+                      <Route
+                        path={'blogs'}
+                        element={<PageAdminBlogs/>}
+                      />
+                      <Route
+                        path={'blogs/new'}
+                        element={<PageAdminBlogsNew/>}
+                      />
+                      <Route
+                        path={'blogs/edit/:blogId'}
+                        element={<PageAdminBlogsEdit/>}
+                      />
+                    </Route>
+                    )
+                  : null
+              }
+              <Route
+                path={'/blog/:blogId'}
+                element={<BlogPage/>}
+              />
+              <Route
+                path={'*'}
+                element={<MainPage/>}
+              />
+              <AuthDetails/>
+            </Routes>
+            )
+          : null
+      }
+
       {
       (
         isLoading
@@ -100,76 +171,6 @@ function App () {
           )
         : null
       }
-      {
-        (
-          isUserLoggedIn
-        )
-          ? (
-            <Routes>
-              <Route
-                path={'/login'}
-                element={<SignIn/>}
-              />
-              <Route
-                path={'/register'}
-                element={<SignUp/>}
-              />
-              {
-                isAdmin
-                  ? (
-                    <Route
-                      path={'/admin'}
-                      element={<PageAdminMain/>}
-                    >
-                      <Route
-                        path={'blogs'}
-                        element={<PageAdminBlogs/>}
-                      />
-                      <Route
-                        path={'blogs/new'}
-                        element={<PageAdminBlogsNew/>}
-                      />
-                      <Route
-                        path={'blogs/edit/:blogId'}
-                        element={<PageAdminBlogsEdit/>}
-                      />
-                    </Route>
-                    )
-                  : null
-              }
-              <Route
-                path={'/blog/:blogId'}
-                element={<BlogPage/>}
-              />
-              <Route
-                path={'*'}
-                element={<MainPage/>}
-              />
-            </Routes>
-            )
-          : (
-            <Routes>
-              <Route
-                path={'/login'}
-                element={<SignIn/>}
-              />
-              <Route
-                path={'/register'}
-                element={<SignUp/>}
-              />
-              <Route
-                path={'/blog/:blogId'}
-                element={<BlogPage/>}
-              />
-              <Route
-                path={'*'}
-                element={<MainPage />}
-              />
-
-            </Routes>
-            )
-      }
-      <AuthDetails/>
     </>
   )
 }

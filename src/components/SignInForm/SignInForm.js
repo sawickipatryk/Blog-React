@@ -11,6 +11,7 @@ export const SignInForm = (props) => {
   const {
     sx,
     onSubmit,
+    onClickCreateAccount,
     ...otherProps
   } = props
 
@@ -131,7 +132,7 @@ export const SignInForm = (props) => {
         </Button>
       </Box>
       <Button
-        href={'/register'}
+        onClick={onClickCreateAccount}
         sx={{
           width: '100%',
           color: 'white',
@@ -157,7 +158,8 @@ export const SignInForm = (props) => {
 
 SignInForm.propTypes = {
   sx: PropTypes.object,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onClickCreateAccount: PropTypes.func.isRequired
 }
 
 export default SignInForm

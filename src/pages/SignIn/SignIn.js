@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React from 'react'
 import PropTypes from 'prop-types'
 
@@ -26,9 +27,10 @@ export const SignIn = (props) => {
     sx,
     ...otherProps
   } = props
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const onClickCreateAccount = React.useCallback(() => navigate('/register'), [navigate])
 
   const methods = useForm()
   const { handleSubmit } = methods
@@ -60,7 +62,10 @@ export const SignIn = (props) => {
           <FormProvider
             {...methods}
           >
-            <SignInForm onSubmit={handleSubmit((data) => signIn(data.email, data.password))} />
+            <SignInForm
+              onSubmit={handleSubmit((data) => signIn(data.email, data.password))}
+              onClickCreateAccount={onClickCreateAccount}
+            />
           </FormProvider>
       }
       />
