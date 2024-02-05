@@ -11,13 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 import theme from '../../theme'
 
-import { useSelector, useDispatch } from 'react-redux'
-
-import { createActionSetPosts } from '../../state/posts'
-
-import { getAll as getPosts } from '../../api/Ourposts/getAll'
-
-import { handleAsyncAction } from '../../handleAsyncAction'
+import { useSelector } from 'react-redux'
 
 export const MainPage = (props) => {
   const {
@@ -37,14 +31,6 @@ export const MainPage = (props) => {
   } = props
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const fetchData = React.useCallback(async () => {
-    handleAsyncAction(async () => {
-      const posts = await getPosts()
-      dispatch(createActionSetPosts(posts))
-    })
-  }, [dispatch])
 
   const sliceArray = (array) => {
     const reverserArray = array && array.toReversed()
@@ -110,10 +96,6 @@ export const MainPage = (props) => {
   const numOfTotalPages = Math.ceil(dataFiltered.length / paginationPerPage)
 
   const visibleBlogs = dataFiltered.splice(indexOfFirstBlog, indexOfLastBlog)
-
-  React.useEffect(() => {
-    fetchData()
-  }, [fetchData])
 
   return (
     <Box
